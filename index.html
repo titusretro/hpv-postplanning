@@ -26,6 +26,7 @@
     --p-daniel: #f5e5b8;     /* butter yellow */
     --p-iggy: #cbd4ee;       /* periwinkle */
     --p-ben: #f0c9b8;        /* salmon */
+    --p-ouassima: #d4ddb5;   /* sage */
     --p-crew: #e3e0d6;       /* bone */
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -258,6 +259,7 @@
   .wp-tag.tone-daniel, .owner.tone-daniel, .pill.tone-daniel { background: var(--p-daniel); border-color: rgba(26,24,22,0.08); }
   .wp-tag.tone-iggy, .owner.tone-iggy, .pill.tone-iggy { background: var(--p-iggy); border-color: rgba(26,24,22,0.08); }
   .wp-tag.tone-ben, .owner.tone-ben, .pill.tone-ben { background: var(--p-ben); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-ouassima, .owner.tone-ouassima, .pill.tone-ouassima { background: var(--p-ouassima); border-color: rgba(26,24,22,0.08); }
   .wp-tag.tone-crew, .owner.tone-crew, .pill.tone-crew { background: var(--p-crew); border-color: rgba(26,24,22,0.08); }
 
   /* Milestones blijven speciaal */
@@ -451,6 +453,7 @@
   .lane-cell .owner.tone-daniel { background: var(--p-daniel); }
   .lane-cell .owner.tone-iggy { background: var(--p-iggy); }
   .lane-cell .owner.tone-ben { background: var(--p-ben); }
+  .lane-cell .owner.tone-ouassima { background: var(--p-ouassima); }
   .lane-cell .owner.tone-crew { background: var(--p-crew); }
   .lane-cell .owner.mix {
     background: linear-gradient(90deg, var(--p-daniel), var(--p-kiki), var(--p-idriss));
@@ -551,6 +554,7 @@
   .tl-bar.tone-daniel { background: var(--p-daniel); }
   .tl-bar.tone-iggy { background: var(--p-iggy); }
   .tl-bar.tone-ben { background: var(--p-ben); }
+  .tl-bar.tone-ouassima { background: var(--p-ouassima); }
   .tl-bar.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .tl-bar.accent { background: var(--accent); color: var(--paper); border-color: var(--accent); }
 
@@ -594,21 +598,249 @@
     .week-block { margin: 0 16px 24px; }
     .weekend-strip { margin: 0 16px 16px; }
   }
+
+  /* Pipeline / Productie-keten */
+  .pipeline-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 0 32px 16px;
+    overflow-x: auto;
+  }
+  .pipe-card {
+    flex: 1 0 240px;
+    min-width: 240px;
+    max-width: 280px;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 20px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pipe-card.milestone {
+    background: var(--paper-warm);
+    border: 2px solid var(--accent);
+  }
+  .pipe-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .pipe-card.milestone .pipe-num { color: var(--accent); font-weight: 600; }
+  .pipe-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .pipe-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .pipe-acts {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .pipe-acts li {
+    padding: 6px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .pipe-acts li:first-child { border-top: none; padding-top: 0; }
+  .pipe-people {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--ink);
+  }
+  .pipe-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 22px;
+    color: var(--ink-soft);
+    padding: 0 6px;
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 980px) {
+    .pipeline-row {
+      flex-direction: column;
+      padding: 0 16px 16px;
+    }
+    .pipe-card { min-width: 0; max-width: none; flex: 1 1 auto; }
+    .pipe-arrow { transform: rotate(90deg); padding: 8px 0; }
+  }
 </style>
 </head>
 <body>
 
 <nav class="tabs">
   <span class="brand">Het Pleintje <em>Van</em></span>
-  <button class="active" data-tab="weekplanner">Weekplanner</button>
+  <button class="active" data-tab="pipeline">Pipeline</button>
+  <button data-tab="weekplanner">Weekplanner</button>
   <button data-tab="overview">Overzicht</button>
   <button data-tab="timeline">Tijdlijn per afl.</button>
   <button data-tab="specs">Aanleveringen</button>
   <button data-tab="contact">Contact</button>
 </nav>
 
-<!-- ─────────── TAB 1 — WEEKPLANNER ─────────── -->
-<section data-tab-panel="weekplanner" class="active">
+<!-- ─────────── TAB 1 — PIPELINE / PRODUCTIE-KETEN ─────────── -->
+<section data-tab-panel="pipeline" class="active">
+
+<div class="wp-intro">
+<div class="kicker" style="margin-bottom:16px;">NPO FunX · YouTube Serie 2026 · 4 Afleveringen</div>
+<h2 style="margin-top:0;"><span class="num">§ 00</span>Productie-keten</h2>
+<p>De hele flow op één pagina, per fase. Het beeld stroomt van links naar rechts; pijlen tonen de overdrachten. In elke kaart zie je wie eraan werkt en wanneer.</p>
+<p>Feedback-momenten zijn hard. Ben, Laila en Ouassima geven hun feedback op de geplande dag; we kunnen niet wachten zonder dat de hele lock-deadline schuift.</p>
+</div>
+
+<div class="pipeline-row">
+
+  <article class="pipe-card">
+    <div class="pipe-num">§ 01</div>
+    <h3 class="pipe-title">Draai</h3>
+    <div class="pipe-date">D+0 · draaidag</div>
+    <ul class="pipe-acts">
+      <li>Filmen op locatie van de speler</li>
+      <li>Bestanden aan einde dag op server</li>
+    </ul>
+    <div class="pipe-people">
+      <span class="pill tone-cihad">Cihad</span>
+      <span class="pill tone-crew">Crew</span>
+      <span class="pill tone-daniel">Daniel</span>
+    </div>
+  </article>
+
+  <div class="pipe-arrow">→</div>
+
+  <article class="pipe-card">
+    <div class="pipe-num">§ 02</div>
+    <h3 class="pipe-title">Inladen + sync</h3>
+    <div class="pipe-date">D+1 · weekend</div>
+    <ul class="pipe-acts">
+      <li>Cihad inlaadt en synct in het weekend, parallel aan de review van de vorige aflevering</li>
+      <li>Maandag klaar om aan rough cut te beginnen</li>
+    </ul>
+    <div class="pipe-people">
+      <span class="pill tone-cihad">Cihad</span>
+    </div>
+  </article>
+
+  <div class="pipe-arrow">→</div>
+
+  <article class="pipe-card">
+    <div class="pipe-num">§ 03</div>
+    <h3 class="pipe-title">Montage</h3>
+    <div class="pipe-date">D+1 t/m D+13</div>
+    <ul class="pipe-acts">
+      <li>Rough cut → V1 (D+7)</li>
+      <li>Feedback ronde 1 op de geplande dag</li>
+      <li>Edit v2 + v3</li>
+      <li>Ezhar plaatst graphics op V2</li>
+      <li>Iggy bedenkt titels + teksten zodra V1 binnen is</li>
+    </ul>
+    <div class="pipe-people">
+      <span class="pill tone-cihad">Cihad</span>
+      <span class="pill tone-ezhar">Ezhar</span>
+      <span class="pill tone-iggy">Iggy</span>
+      <span class="pill tone-ben">Ben</span>
+      <span class="pill tone-laila">Laila</span>
+      <span class="pill tone-ouassima">Ouassima</span>
+    </div>
+  </article>
+
+  <div class="pipe-arrow">→</div>
+
+  <article class="pipe-card milestone">
+    <div class="pipe-num">★ Mijlpaal</div>
+    <h3 class="pipe-title">Beeld vast</h3>
+    <div class="pipe-date">D+14 · hard</div>
+    <ul class="pipe-acts">
+      <li>XML naar Kiki (beeld + graphics)</li>
+      <li>AAF naar Idriss (geluid)</li>
+      <li>Vanaf hier geen picture changes meer</li>
+    </ul>
+    <div class="pipe-people">
+      <span class="pill tone-cihad">Cihad</span>
+    </div>
+  </article>
+
+  <div class="pipe-arrow">→</div>
+
+  <article class="pipe-card">
+    <div class="pipe-num">§ 04</div>
+    <h3 class="pipe-title">Finishing</h3>
+    <div class="pipe-date">D+15 t/m D+19</div>
+    <ul class="pipe-acts">
+      <li>Kiki: kleurcorrectie (al voorbereid pre-lock)</li>
+      <li>Idriss: eindmix + sound design</li>
+      <li>Laila levert muziekstems aan Idriss (D+17)</li>
+      <li>Idriss zet eindmix op server (D+18)</li>
+      <li>Ezhar levert thumbnails</li>
+    </ul>
+    <div class="pipe-people">
+      <span class="pill tone-kiki">Kiki</span>
+      <span class="pill tone-idriss">Idriss</span>
+      <span class="pill tone-laila">Laila</span>
+      <span class="pill tone-ezhar">Ezhar</span>
+    </div>
+  </article>
+
+  <div class="pipe-arrow">→</div>
+
+  <article class="pipe-card">
+    <div class="pipe-num">§ 05</div>
+    <h3 class="pipe-title">Eindversie + QC</h3>
+    <div class="pipe-date">D+19 t/m D+21</div>
+    <ul class="pipe-acts">
+      <li>Kiki rendert de eindversie en zet 'm op de server</li>
+      <li>Ben doet final QC op de server</li>
+      <li>Bij akkoord: bestand klaar voor Iggy</li>
+    </ul>
+    <div class="pipe-people">
+      <span class="pill tone-kiki">Kiki</span>
+      <span class="pill tone-ben">Ben</span>
+    </div>
+  </article>
+
+  <div class="pipe-arrow">→</div>
+
+  <article class="pipe-card">
+    <div class="pipe-num">§ 06</div>
+    <h3 class="pipe-title">Online</h3>
+    <div class="pipe-date">lanceerdag</div>
+    <ul class="pipe-acts">
+      <li>Iggy haalt het bestand van de server</li>
+      <li>Uploadt naar YouTube met titel + ondertiteling</li>
+      <li>Reels publicatie volgt in dezelfde week</li>
+    </ul>
+    <div class="pipe-people">
+      <span class="pill tone-iggy">Iggy</span>
+    </div>
+  </article>
+
+</div>
+</section>
+
+<!-- ─────────── TAB 2 — WEEKPLANNER ─────────── -->
+<section data-tab-panel="weekplanner">
 
 <div class="wp-intro">
 <div class="kicker" style="margin-bottom:16px;">NPO FunX · YouTube Serie 2026 · 4 Afleveringen</div>
@@ -635,6 +867,7 @@
   <span class="pill tone-daniel">Daniel</span>
   <span class="pill tone-iggy">Iggy</span>
   <span class="pill tone-ben">Ben</span>
+  <span class="pill tone-ouassima">Ouassima</span>
   <span class="pill tone-crew">Crew</span>
 </div>
 
@@ -716,7 +949,7 @@
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">V1 naar Iggy</span>
       <span class="wp-tag tone-ben">Feedback op Frame.io</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span><span class="owner tone-ouassima">Ouassima</span></div>
     </div>
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">Edit v2</span>
@@ -826,7 +1059,7 @@
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">V1 naar Iggy</span>
       <span class="wp-tag tone-ben">Feedback</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span><span class="owner tone-ouassima">Ouassima</span></div>
     </div>
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">Edit v2</span>
@@ -928,7 +1161,7 @@
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">V1 naar Iggy</span>
       <span class="wp-tag tone-ben">Feedback</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span><span class="owner tone-ouassima">Ouassima</span></div>
     </div>
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">Edit v2</span>
@@ -961,7 +1194,7 @@
     </div>
     <div class="lane-cell">
       <span class="wp-tag tone-ben">Feedback</span>
-      <div class="owner-row"><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+      <div class="owner-row"><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span><span class="owner tone-ouassima">Ouassima</span></div>
     </div>
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">Edit v2</span>
@@ -1312,7 +1545,7 @@
 <tr><td>Bestandenbeheer</td><td><span class="pill tone-daniel">Daniel</span></td></tr>
 <tr><td>YouTube-beheer · titels, teksten</td><td><span class="pill tone-iggy">Iggy</span></td></tr>
 <tr><td>Productie-coördinator</td><td>Celine Santos Pires</td></tr>
-<tr><td>Eindredactie FunX</td><td>Ouassima</td></tr>
+<tr><td>Eindredactie FunX · feedback rondes</td><td><span class="pill tone-ouassima">Ouassima</span></td></tr>
 <tr><td>Productieleiding &amp; final QC</td><td><span class="pill tone-ben">Ben Zoref</span></td></tr>
 </tbody>
 </table>
@@ -1588,8 +1821,8 @@
   <td><span class="tbd">TBD</span></td>
 </tr>
 <tr>
-  <td class="contact-name">Ouassima</td>
-  <td>Eindredactie FunX</td>
+  <td class="contact-name"><span class="pill tone-ouassima">Ouassima</span></td>
+  <td>Eindredactie FunX · feedback rondes</td>
   <td><a href="mailto:ouassima@funx.nl">ouassima@funx.nl</a></td>
   <td><span class="tbd">TBD</span></td>
 </tr>
