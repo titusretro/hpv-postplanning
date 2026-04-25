@@ -693,22 +693,22 @@
 
 <nav class="tabs">
   <span class="brand">Het Pleintje <em>Van</em></span>
-  <button class="active" data-tab="pipeline">Pipeline</button>
-  <button data-tab="weekplanner">Weekplanner</button>
+  <button class="active" data-tab="weekplanner">Weekplanner</button>
   <button data-tab="overview">Overzicht</button>
   <button data-tab="timeline">Tijdlijn per afl.</button>
+  <button data-tab="pipeline">Pipeline</button>
   <button data-tab="specs">Aanleveringen</button>
   <button data-tab="contact">Contact</button>
 </nav>
 
-<!-- ─────────── TAB 1 — PIPELINE / PRODUCTIE-KETEN ─────────── -->
-<section data-tab-panel="pipeline" class="active">
+<!-- ─────────── PIPELINE / PRODUCTIE-KETEN ─────────── -->
+<section data-tab-panel="pipeline">
 
 <div class="wp-intro">
 <div class="kicker" style="margin-bottom:16px;">NPO FunX · YouTube Serie 2026 · 4 Afleveringen</div>
 <h2 style="margin-top:0;"><span class="num">§ 00</span>Productie-keten</h2>
 <p>De hele flow op één pagina, per fase. Het beeld stroomt van links naar rechts; pijlen tonen de overdrachten. In elke kaart zie je wie eraan werkt en wanneer.</p>
-<p>Feedback-momenten zijn hard. Ben, Laila en Ouassima geven hun feedback op de geplande dag; we kunnen niet wachten zonder dat de hele lock-deadline schuift.</p>
+<p>Feedback-momenten zijn hard. Ben, Laila en Ouassima geven hun feedback op de geplande dag; we kunnen niet wachten zonder dat de Edit Lock-deadline schuift.</p>
 </div>
 
 <div class="pipeline-row">
@@ -770,7 +770,7 @@
 
   <article class="pipe-card milestone">
     <div class="pipe-num">★ Mijlpaal</div>
-    <h3 class="pipe-title">Beeld vast</h3>
+    <h3 class="pipe-title">Edit Lock</h3>
     <div class="pipe-date">D+14 · hard</div>
     <ul class="pipe-acts">
       <li>XML naar Kiki (beeld + graphics)</li>
@@ -839,20 +839,20 @@
 </div>
 </section>
 
-<!-- ─────────── TAB 2 — WEEKPLANNER ─────────── -->
-<section data-tab-panel="weekplanner">
+<!-- ─────────── WEEKPLANNER ─────────── -->
+<section data-tab-panel="weekplanner" class="active">
 
 <div class="wp-intro">
 <div class="kicker" style="margin-bottom:16px;">NPO FunX · YouTube Serie 2026 · 4 Afleveringen</div>
 <h2 style="margin-top:0;"><span class="num">§ 01</span>Weekplanner — ma t/m vrij</h2>
 <p>Werkplanning voor de vier afleveringen. Elke rij is een aflevering, elke kolom een werkdag. Kleur = persoon; zie de legenda hieronder. Rode data zijn harde deadlines.</p>
-<p>Werkafspraak: iedereen uploadt zijn werk naar de FunX-server; wij regelen de toegang. Cihad doet in het weekend de nieuwe footage inladen en syncen, zodat hij maandag meteen aan de rough cut kan beginnen (parallel aan review van de vorige aflevering). Kiki zet de eindversie op de server; Ben doet daar de final QC; Iggy haalt het bestand van de server en zet het op YouTube.</p>
+<p>Werkafspraak: iedereen uploadt zijn werk naar de FunX-server; wij regelen de toegang. Cihad laadt in het weekend de nieuwe footage in en synct die, zodat hij maandag meteen aan de rough cut kan beginnen (parallel aan de review van de vorige aflevering). Kiki zet de eindversie op de server; Ben doet daar de final QC; Iggy haalt 'm op en zet 'm op YouTube.</p>
 </div>
 
 <div class="wp-legend">
   <span class="legend-label">Mijlpalen</span>
   <span><span class="wp-tag draai">Draaidag</span></span>
-  <span><span class="wp-tag lock">Beeld vast</span></span>
+  <span><span class="wp-tag lock">Edit Lock</span></span>
   <span><span class="wp-tag handoff">Aanlevering</span></span>
   <span><span class="wp-tag master">Eindversie</span></span>
   <span><span class="wp-tag publish">Online</span></span>
@@ -898,12 +898,11 @@
       <span class="wp-tag tone-idriss">Stem opschonen</span>
       <div class="owner-row"><span class="owner tone-daniel">Daniel</span><span class="owner tone-cihad">Cihad</span><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
     </div>
+    <div class="lane-cell empty"></div>
     <div class="lane-cell">
-      <span class="wp-tag tone-cihad">Selectie</span>
       <span class="wp-tag tone-cihad">Rough cut start</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
-    <div class="lane-cell empty"></div>
 
     <div class="lane-cell lane-name">E02 · Sherel<span class="loc">Rotterdam</span></div>
     <div class="lane-cell empty"></div>
@@ -965,7 +964,7 @@
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
     <div class="lane-cell">
-      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag lock">Edit Lock</span>
       <span class="wp-tag handoff">XML naar Kiki</span>
       <span class="wp-tag handoff">AAF naar Idriss</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
@@ -998,20 +997,13 @@
     <div class="lane-cell empty"></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
-    <div class="lane-cell empty"></div>
-    <div class="lane-cell empty"></div>
-    <div class="lane-cell empty"></div>
-    <div class="lane-cell empty"></div>
-    <div class="lane-cell">
-      <span class="wp-tag draai">Draaidag (indicatie)</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-crew">Crew</span></div>
-    </div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
   </div>
 </div>
 
 <div class="weekend-strip">
   <strong>Weekend 9-10 mei</strong>
-  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E03 + E04 op server</span>
+  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E03 op server</span>
 </div>
 
 <!-- Week 20 -->
@@ -1024,7 +1016,7 @@
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
     <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">11/5</div></div>
     <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">12/5</div></div>
-    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">13/5</div></div>
+    <div class="day-head milestone"><div class="day-name">Woensdag</div><div class="day-date">13/5</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">14/5</div></div>
     <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">15/5</div></div>
 
@@ -1075,7 +1067,7 @@
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
     <div class="lane-cell">
-      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag lock">Edit Lock</span>
       <span class="wp-tag handoff">XML naar Kiki</span>
       <span class="wp-tag handoff">AAF naar Idriss</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
@@ -1095,15 +1087,25 @@
     </div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
     <div class="lane-cell">
-      <span class="wp-tag tone-cihad">Rough cut start</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+      <span class="wp-tag draai">Draai</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-crew">Crew</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-daniel">Bestanden op server</span>
+      <span class="wp-tag tone-kiki">Kleurvoorbereiding</span>
+      <span class="wp-tag tone-idriss">Stem opschonen</span>
+      <div class="owner-row"><span class="owner tone-daniel">Daniel</span><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
     </div>
     <div class="lane-cell empty"></div>
-    <div class="lane-cell empty"></div>
-    <div class="lane-cell empty"></div>
-    <div class="lane-cell empty"></div>
   </div>
+</div>
+
+<div class="weekend-strip">
+  <strong>Weekend 16-17 mei</strong>
+  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E04 op server</span>
 </div>
 
 <!-- Week 21 -->
@@ -1177,27 +1179,21 @@
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
     <div class="lane-cell">
-      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag lock">Edit Lock</span>
       <span class="wp-tag handoff">Aanleveringen</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut start</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
     <div class="lane-cell empty"></div>
     <div class="lane-cell">
       <span class="wp-tag tone-cihad">Rough cut v1</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
-    </div>
-    <div class="lane-cell">
-      <span class="wp-tag tone-cihad">V1 naar Iggy</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
-    </div>
-    <div class="lane-cell">
-      <span class="wp-tag tone-ben">Feedback</span>
-      <div class="owner-row"><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span><span class="owner tone-ouassima">Ouassima</span></div>
-    </div>
-    <div class="lane-cell">
-      <span class="wp-tag tone-cihad">Edit v2</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
   </div>
@@ -1257,6 +1253,15 @@
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
     <div class="lane-cell">
+      <span class="wp-tag tone-cihad">V1 naar Iggy</span>
+      <span class="wp-tag tone-ben">Feedback</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span><span class="owner tone-ouassima">Ouassima</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v2</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
       <span class="wp-tag tone-cihad">Edit v3</span>
       <span class="wp-tag tone-ezhar">Graphics</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ezhar">Ezhar</span></div>
@@ -1266,15 +1271,7 @@
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
     <div class="lane-cell">
-      <span class="wp-tag tone-cihad">Laatste polijst</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
-    </div>
-    <div class="lane-cell">
-      <span class="wp-tag tone-cihad">Laatste polijst</span>
-      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
-    </div>
-    <div class="lane-cell">
-      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag lock">Edit Lock</span>
       <span class="wp-tag handoff">Aanleveringen</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
@@ -1524,12 +1521,12 @@
 
 <h2><span class="num">§ 02</span>Afleveringen &amp; mijlpalen</h2>
 <table>
-<thead><tr><th>Aflevering</th><th>Draaidag</th><th>Beeld vast</th><th>Online</th></tr></thead>
+<thead><tr><th>Aflevering</th><th>Draaidag</th><th>Edit Lock</th><th>Online</th></tr></thead>
 <tbody>
 <tr><td><div class="aflevering"><strong>Anass Salah-Eddine</strong><span>E01 · Amsterdam</span></div></td><td>28 apr</td><td>8 mei</td><td>~15 jun</td></tr>
 <tr><td><div class="aflevering"><strong>Sherel Floranus</strong><span>E02 · Rotterdam</span></div></td><td>30 apr</td><td>15 mei</td><td>~22 jun</td></tr>
-<tr><td><div class="aflevering"><strong>Dailon Livramento</strong><span>E03 · locatie NTB</span></div></td><td>eerste 2 wk mei</td><td>22 mei</td><td>~29 jun</td></tr>
-<tr><td><div class="aflevering"><strong>Gravenberch (optie)</strong><span>E04 · locatie NTB</span></div></td><td>eerste 2 wk mei</td><td>29 mei</td><td>~6 jul</td></tr>
+<tr><td><div class="aflevering"><strong>Dailon Livramento</strong><span>E03 · locatie NTB</span></div></td><td>6 mei</td><td>22 mei</td><td>~29 jun</td></tr>
+<tr><td><div class="aflevering"><strong>Gravenberch (optie)</strong><span>E04 · locatie NTB</span></div></td><td>13 mei</td><td>29 mei</td><td>~6 jul</td></tr>
 </tbody>
 </table>
 
@@ -1552,8 +1549,8 @@
 
 <div class="intro-block">
 <h3>Server-workflow</h3>
-<p>Alles gaat via de FunX-server. Iedereen uploadt zijn werk daar; wij zorgen dat iedereen de juiste toegang heeft. Cihad doet in het weekend de nieuwe footage inladen en syncen zodat hij maandag kan starten op rough cut, parallel aan de review van de vorige aflevering.</p>
-<p>Cihad levert de montage-timeline (XML) met beeld én de graphics van Ezhar. Idriss stuurt de eindmix naar Kiki. Kiki rendert de eindversie; één bestand met beeld, graphics en geluid. Die zet ze op de server. Ben doet daar de final QC; Iggy haalt het bestand van de server en zet het op YouTube.</p>
+<p>Alles gaat via de FunX-server. Iedereen uploadt zijn werk daar; wij zorgen dat iedereen de juiste toegang heeft. Cihad laadt in het weekend de nieuwe footage in en synct die, zodat hij maandag meteen aan de rough cut kan beginnen (parallel aan de review van de vorige aflevering).</p>
+<p>Cihad levert de montage-timeline (XML) met beeld én de graphics van Ezhar. Idriss stuurt de eindmix naar Kiki. Kiki rendert de eindversie; één bestand met beeld, graphics en geluid. Daarna zet zij 'm op de server. Ben doet daar de final QC; Iggy haalt het bestand op en zet het op YouTube.</p>
 </div>
 
 </div>
@@ -1564,7 +1561,7 @@
 
 <div class="wp-intro">
 <h2 style="margin-top: 20px;"><span class="num">§ 04</span>Tijdlijn per aflevering</h2>
-<p>Dagen geteld vanaf de draaidag (D+0). Elke rij is een persoon; balkkleur matcht de naam-pil. Wat naast elkaar staat gebeurt tegelijk; rode markeringen zijn harde mijlpalen.</p>
+<p>Dagen geteld vanaf de draaidag (D+0). Elke rij is een persoon; de balkkleur volgt de naam-pil. Wat naast elkaar staat gebeurt tegelijk; rode markeringen zijn harde mijlpalen.</p>
 </div>
 
 <div class="timeline-wrap">
@@ -1607,7 +1604,7 @@
 
   <div class="tl-lane-label">Kiki<span class="lane-sub">Kleur + eindversie</span></div>
   <div class="tl-cell"></div><div class="tl-cell"></div>
-  <div class="tl-cell"><span class="tl-bar span-to-12 tone-kiki">Kleurvoorbereiding (voor beeld vast)</span></div>
+  <div class="tl-cell"><span class="tl-bar span-to-12 tone-kiki">Kleurvoorbereiding (voor Edit Lock)</span></div>
   <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
   <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
   <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
@@ -1618,7 +1615,7 @@
 
   <div class="tl-lane-label">Idriss<span class="lane-sub">Geluid + mix</span></div>
   <div class="tl-cell"></div><div class="tl-cell"></div>
-  <div class="tl-cell"><span class="tl-bar span-to-12 tone-idriss">Stem opschonen (voor beeld vast)</span></div>
+  <div class="tl-cell"><span class="tl-bar span-to-12 tone-idriss">Stem opschonen (voor Edit Lock)</span></div>
   <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
   <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
   <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
@@ -1675,7 +1672,7 @@
 </div>
 </div>
 
-<p style="font-size: 13px; color: var(--ink-soft); margin: 20px 32px 40px;"><strong style="color: var(--accent); font-weight: 600;">Kernmijlpalen:</strong> D+7 = V1 naar Iggy · D+14 = beeld vast (hard) · D+20 = eindversie op server · D+21 = Ben final QC · lancering via Iggy op YouTube.</p>
+<p style="font-size: 13px; color: var(--ink-soft); margin: 20px 32px 40px;"><strong style="color: var(--accent); font-weight: 600;">Kernmijlpalen:</strong> D+7 = V1 naar Iggy · D+14 = Edit Lock (hard) · D+20 = eindversie op server · D+21 = Ben final QC · lancering via Iggy op YouTube.</p>
 
 </section>
 
@@ -1713,7 +1710,7 @@
 <li>Volumenorm: richting −14 LUFS, niet over −1 dBTP</li>
 </ul>
 
-<h3>Ezhar (vóór beeld vast)</h3>
+<h3>Ezhar (vóór Edit Lock)</h3>
 <ul>
 <li>Naamtitels, titels, eindkaart; ProRes 4444 met alpha-laag (Straight, niet pre-multiplied)</li>
 <li><strong>Unieke bestandsnamen per aflevering</strong>; nooit <code>LT_01.mov</code> hergebruiken over E01—E04</li>
