@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Het Pleintje Van — Postproductieplanning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1816;
+    --ink-soft: #5a5550;
+    --paper: #f5f1ea;
+    --paper-warm: #ebe5da;
+    --paper-dark: #ddd4c3;
+    --accent: #c4402c;
+    --rule: #d8d0c2;
+
+    /* Pastel palette — één kleur per persoon; werk van die persoon krijgt dezelfde tint */
+    --p-cihad: #c9dff0;      /* sky blue */
+    --p-kiki: #f7d8c4;       /* peach */
+    --p-idriss: #cce8d2;     /* mint */
+    --p-ezhar: #dccfec;      /* lavender */
+    --p-laila: #f0c9d8;      /* rose */
+    --p-daniel: #f5e5b8;     /* butter yellow */
+    --p-iggy: #cbd4ee;       /* periwinkle */
+    --p-ben: #f0c9b8;        /* salmon */
+    --p-crew: #e3e0d6;       /* bone */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+
+  /* Sticky tab nav */
+  nav.tabs {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--ink);
+    padding: 18px 32px;
+    display: flex;
+    gap: 2px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  nav.tabs .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    margin-right: 32px;
+  }
+  nav.tabs .brand em { font-style: italic; color: var(--accent); }
+  nav.tabs button {
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s;
+  }
+  nav.tabs button:hover { background: var(--paper-warm); color: var(--ink); }
+  nav.tabs button.active { background: var(--ink); color: var(--paper); }
+
+  /* Tab panels */
+  [data-tab-panel] { display: none; }
+  [data-tab-panel].active { display: block; }
+
+  /* Container for narrow content */
+  .container { max-width: 1040px; margin: 0 auto; padding: 60px 24px 80px; }
+  .container-wide { max-width: none; margin: 0; padding: 40px 32px 80px; }
+
+  /* Overview */
+  .kicker {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+  }
+  h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 64px;
+  }
+  .meta-item .label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .meta-item .value {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    margin-top: 72px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 16px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h2 .num {
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-right: 20px;
+    vertical-align: middle;
+  }
+  h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 36px 0 12px;
+  }
+  p { margin-bottom: 14px; max-width: 820px; }
+  ul, ol { padding-left: 22px; margin-bottom: 20px; max-width: 820px; }
+  li { margin-bottom: 6px; }
+  code {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 13px;
+    background: var(--paper-warm);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 20px 0 36px;
+  }
+  th {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--ink);
+    font-weight: 500;
+  }
+  td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  td:first-child { font-family: 'Fraunces', serif; font-weight: 600; }
+  .aflevering { display: flex; flex-direction: column; gap: 4px; }
+  .aflevering strong { font-family: 'Fraunces', serif; font-size: 17px; }
+  .aflevering span { color: var(--ink-soft); font-size: 13px; }
+  .intro-block {
+    background: var(--paper-warm);
+    padding: 28px 32px;
+    margin: 32px 0;
+    border-left: 3px solid var(--accent);
+  }
+  .intro-block h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  .intro-block p {
+    margin-bottom: 10px;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  /* Weekplanner full-screen dag-grid */
+  .wp-intro {
+    padding: 40px 32px 8px;
+    max-width: 1040px;
+  }
+  .wp-intro p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .wp-legend {
+    padding: 12px 32px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--ink-soft);
+    align-items: center;
+  }
+  .wp-legend.people {
+    padding: 4px 32px 24px;
+    gap: 10px;
+  }
+  .wp-legend .legend-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-right: 8px;
+  }
+  .wp-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 3px 9px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    border-radius: 2px;
+    white-space: nowrap;
+    line-height: 1.35;
+    background: var(--paper-warm);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+
+  /* Pastel per persoon — zowel werkblokjes als naam-pillen */
+  .wp-tag.tone-cihad, .owner.tone-cihad, .pill.tone-cihad { background: var(--p-cihad); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-kiki, .owner.tone-kiki, .pill.tone-kiki { background: var(--p-kiki); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-idriss, .owner.tone-idriss, .pill.tone-idriss { background: var(--p-idriss); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-ezhar, .owner.tone-ezhar, .pill.tone-ezhar { background: var(--p-ezhar); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-laila, .owner.tone-laila, .pill.tone-laila { background: var(--p-laila); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-daniel, .owner.tone-daniel, .pill.tone-daniel { background: var(--p-daniel); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-iggy, .owner.tone-iggy, .pill.tone-iggy { background: var(--p-iggy); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-ben, .owner.tone-ben, .pill.tone-ben { background: var(--p-ben); border-color: rgba(26,24,22,0.08); }
+  .wp-tag.tone-crew, .owner.tone-crew, .pill.tone-crew { background: var(--p-crew); border-color: rgba(26,24,22,0.08); }
+
+  /* Milestones blijven speciaal */
+  .wp-tag.draai { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .wp-tag.lock {
+    background: var(--accent); color: var(--paper);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-color: var(--accent);
+  }
+  .wp-tag.master {
+    background: var(--ink); color: var(--paper);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-color: var(--ink);
+  }
+  .wp-tag.publish {
+    background: var(--accent); color: var(--paper);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-color: var(--accent);
+  }
+  .wp-tag.handoff {
+    background: var(--ink); color: var(--paper);
+    font-style: italic;
+    border-color: var(--ink);
+  }
+
+  /* Naam-pillen in legenda en in cellen */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-radius: 10px;
+    border: 1px solid rgba(26,24,22,0.08);
+    color: var(--ink);
+  }
+
+  /* Weekend strip tussen weken */
+  .weekend-strip {
+    margin: 0 32px 16px;
+    padding: 10px 20px;
+    background: var(--paper-warm);
+    border: 1px dashed var(--rule);
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .weekend-strip strong {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 12px;
+    letter-spacing: 0;
+    margin-right: 4px;
+    text-transform: none;
+  }
+
+  .week-block {
+    margin: 0 32px 24px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+  }
+  .week-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 16px 20px;
+    background: var(--ink);
+    color: var(--paper);
+    align-items: baseline;
+  }
+  .week-head .week-no {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .week-head .week-dates {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper-warm);
+  }
+  .week-grid {
+    display: grid;
+    grid-template-columns: 140px repeat(5, 1fr);
+  }
+  .day-head {
+    padding: 14px 16px;
+    background: var(--paper-warm);
+    border-bottom: 1px solid var(--ink);
+    border-right: 1px solid var(--rule);
+    text-align: center;
+  }
+  .day-head:last-child { border-right: none; }
+  .day-head.lane-label {
+    background: var(--paper-dark);
+    text-align: left;
+  }
+  .day-head .day-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .day-head .day-date {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1;
+    margin-top: 4px;
+  }
+  .day-head.milestone .day-date { color: var(--accent); }
+  .lane-cell {
+    padding: 14px 12px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    min-height: 74px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-content: flex-start;
+  }
+  .lane-cell:last-child { border-right: none; }
+  .lane-cell:nth-last-child(-n+5) { border-bottom: none; }
+  .lane-cell.lane-name {
+    background: var(--paper-warm);
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: -0.01em;
+    border-right: 1px solid var(--ink);
+    align-content: center;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .lane-name .loc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .lane-cell.empty {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 8px,
+      rgba(90, 85, 80, 0.04) 8px,
+      rgba(90, 85, 80, 0.04) 10px
+    );
+  }
+  .lane-cell .owner {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 2px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(26,24,22,0.08);
+  }
+  /* Naam-pillen in cellen: tone-kleuren winnen nu (hogere specificiteit via .lane-cell scope) */
+  .lane-cell .owner.tone-cihad { background: var(--p-cihad); }
+  .lane-cell .owner.tone-kiki { background: var(--p-kiki); }
+  .lane-cell .owner.tone-idriss { background: var(--p-idriss); }
+  .lane-cell .owner.tone-ezhar { background: var(--p-ezhar); }
+  .lane-cell .owner.tone-laila { background: var(--p-laila); }
+  .lane-cell .owner.tone-daniel { background: var(--p-daniel); }
+  .lane-cell .owner.tone-iggy { background: var(--p-iggy); }
+  .lane-cell .owner.tone-ben { background: var(--p-ben); }
+  .lane-cell .owner.tone-crew { background: var(--p-crew); }
+  .lane-cell .owner.mix {
+    background: linear-gradient(90deg, var(--p-daniel), var(--p-kiki), var(--p-idriss));
+  }
+  .lane-cell .owner-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  /* Horizontal Gantt (D+X timeline, lane view) */
+  .timeline-wrap {
+    background: var(--paper-warm);
+    padding: 48px 40px 40px;
+    margin: 24px 32px 0;
+    border: 1px solid var(--rule);
+    overflow-x: auto;
+  }
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: 180px repeat(21, minmax(82px, 1fr));
+    min-width: 1900px;
+    row-gap: 0;
+  }
+  .tl-axis-label, .tl-axis-tick {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .tl-axis-label { padding-right: 12px; }
+  .tl-axis-tick { text-align: center; font-weight: 500; }
+  .tl-axis-tick.strong { color: var(--ink); font-weight: 600; }
+  .tl-axis-tick.accent { color: var(--accent); font-weight: 600; }
+  .tl-lane-label {
+    padding: 18px 12px 18px 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+  }
+  .tl-lane-label .lane-sub {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .tl-cell {
+    border-top: 1px solid var(--rule);
+    border-left: 1px dashed rgba(90,85,80,0.15);
+    position: relative;
+    min-height: 76px;
+  }
+  .tl-cell:last-child { border-right: 1px dashed rgba(90,85,80,0.15); }
+  .tl-bar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 4px;
+    right: 4px;
+    padding: 6px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    white-space: normal;
+    overflow: hidden;
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    z-index: 2;
+  }
+  .tl-bar.span-to-2 { right: calc(-100% - 4px); }
+  .tl-bar.span-to-3 { right: calc(-200% - 4px); }
+  .tl-bar.span-to-4 { right: calc(-300% - 4px); }
+  .tl-bar.span-to-6 { right: calc(-500% - 4px); }
+  .tl-bar.span-to-8 { right: calc(-700% - 4px); }
+  .tl-bar.span-to-12 { right: calc(-1100% - 4px); }
+  .tl-bar.tone-cihad { background: var(--p-cihad); }
+  .tl-bar.tone-kiki { background: var(--p-kiki); }
+  .tl-bar.tone-idriss { background: var(--p-idriss); }
+  .tl-bar.tone-ezhar { background: var(--p-ezhar); }
+  .tl-bar.tone-laila { background: var(--p-laila); }
+  .tl-bar.tone-daniel { background: var(--p-daniel); }
+  .tl-bar.tone-iggy { background: var(--p-iggy); }
+  .tl-bar.tone-ben { background: var(--p-ben); }
+  .tl-bar.solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tl-bar.accent { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+
+  /* Contact */
+  .contact-table td, .contact-table th {
+    font-size: 14px;
+  }
+  .contact-table td.contact-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .contact-table td a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--rule);
+    text-underline-offset: 3px;
+  }
+  .contact-table td a:hover { text-decoration-color: var(--accent); }
+  .tbd {
+    color: var(--accent);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  footer {
+    padding: 40px 32px;
+    border-top: 1px solid var(--rule);
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 980px) {
+    .week-grid { grid-template-columns: 1fr; }
+    .day-head, .lane-cell { border-right: none; border-bottom: 1px solid var(--rule); }
+    .lane-cell.lane-name { border-right: none; border-bottom: 1px solid var(--ink); }
+    .timeline-wrap { margin: 24px 16px 0; }
+    .week-block { margin: 0 16px 24px; }
+    .weekend-strip { margin: 0 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="tabs">
+  <span class="brand">Het Pleintje <em>Van</em></span>
+  <button class="active" data-tab="weekplanner">Weekplanner</button>
+  <button data-tab="overview">Overzicht</button>
+  <button data-tab="timeline">Tijdlijn per afl.</button>
+  <button data-tab="specs">Aanleveringen</button>
+  <button data-tab="contact">Contact</button>
+</nav>
+
+<!-- ─────────── TAB 1 — WEEKPLANNER ─────────── -->
+<section data-tab-panel="weekplanner" class="active">
+
+<div class="wp-intro">
+<div class="kicker" style="margin-bottom:16px;">NPO FunX · YouTube Serie 2026 · 4 Afleveringen</div>
+<h2 style="margin-top:0;"><span class="num">§ 01</span>Weekplanner — ma t/m vrij</h2>
+<p>Werkplanning voor de vier afleveringen. Elke rij is een aflevering, elke kolom een werkdag. Kleur = persoon; zie de legenda hieronder. Rode data zijn harde deadlines.</p>
+<p>Werkafspraak: iedereen uploadt zijn werk naar de FunX-server; wij regelen de toegang. Cihad doet in het weekend de nieuwe footage inladen en syncen, zodat hij maandag meteen aan de rough cut kan beginnen (parallel aan review van de vorige aflevering). Kiki zet de eindversie op de server; Ben doet daar de final QC; Iggy haalt het bestand van de server en zet het op YouTube.</p>
+</div>
+
+<div class="wp-legend">
+  <span class="legend-label">Mijlpalen</span>
+  <span><span class="wp-tag draai">Draaidag</span></span>
+  <span><span class="wp-tag lock">Beeld vast</span></span>
+  <span><span class="wp-tag handoff">Aanlevering</span></span>
+  <span><span class="wp-tag master">Eindversie</span></span>
+  <span><span class="wp-tag publish">Online</span></span>
+</div>
+<div class="wp-legend people">
+  <span class="legend-label">Wie</span>
+  <span class="pill tone-cihad">Cihad</span>
+  <span class="pill tone-kiki">Kiki</span>
+  <span class="pill tone-idriss">Idriss</span>
+  <span class="pill tone-ezhar">Ezhar</span>
+  <span class="pill tone-laila">Laila</span>
+  <span class="pill tone-daniel">Daniel</span>
+  <span class="pill tone-iggy">Iggy</span>
+  <span class="pill tone-ben">Ben</span>
+  <span class="pill tone-crew">Crew</span>
+</div>
+
+<!-- Week 18 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 18</span>
+    <span class="week-dates">27 apr — 1 mei 2026</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">27/4</div></div>
+    <div class="day-head milestone"><div class="day-name">Dinsdag</div><div class="day-date">28/4</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">29/4</div></div>
+    <div class="day-head milestone"><div class="day-name">Donderdag</div><div class="day-date">30/4</div></div>
+    <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">1/5</div></div>
+
+    <div class="lane-cell lane-name">E01 · Anass<span class="loc">Amsterdam</span></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell">
+      <span class="wp-tag draai">Draai 16:00</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-crew">Crew</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-daniel">Bestanden op server</span>
+      <span class="wp-tag tone-cihad">Inladen + syncen</span>
+      <span class="wp-tag tone-kiki">Kleurvoorbereiding</span>
+      <span class="wp-tag tone-idriss">Stem opschonen</span>
+      <div class="owner-row"><span class="owner tone-daniel">Daniel</span><span class="owner tone-cihad">Cihad</span><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Selectie</span>
+      <span class="wp-tag tone-cihad">Rough cut start</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E02 · Sherel<span class="loc">Rotterdam</span></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell">
+      <span class="wp-tag draai">Draai</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-crew">Crew</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-daniel">Bestanden op server</span>
+      <div class="owner-row"><span class="owner tone-daniel">Daniel</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E03 · Dailon</div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+
+    <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+  </div>
+</div>
+
+<div class="weekend-strip">
+  <strong>Weekend 2-3 mei</strong>
+  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E02 op server</span>
+</div>
+
+<!-- Week 19 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 19</span>
+    <span class="week-dates">4 — 8 mei 2026</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">4/5</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">5/5</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">6/5</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">7/5</div></div>
+    <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">8/5</div></div>
+
+    <div class="lane-cell lane-name">E01 · Anass</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">V1 naar Iggy</span>
+      <span class="wp-tag tone-ben">Feedback op Frame.io</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v2</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v3</span>
+      <span class="wp-tag tone-ezhar">Graphics in V2</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ezhar">Ezhar</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Laatste polijst</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag handoff">XML naar Kiki</span>
+      <span class="wp-tag handoff">AAF naar Idriss</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E02 · Sherel</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut start</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut v1</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E03 · Dailon</div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell">
+      <span class="wp-tag draai">Draaidag (indicatie)</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-crew">Crew</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-daniel">Bestanden op server</span>
+      <div class="owner-row"><span class="owner tone-daniel">Daniel</span></div>
+    </div>
+    <div class="lane-cell empty"></div>
+
+    <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell">
+      <span class="wp-tag draai">Draaidag (indicatie)</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-crew">Crew</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="weekend-strip">
+  <strong>Weekend 9-10 mei</strong>
+  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E03 + E04 op server</span>
+</div>
+
+<!-- Week 20 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 20</span>
+    <span class="week-dates">11 — 15 mei 2026</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">11/5</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">12/5</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">13/5</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">14/5</div></div>
+    <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">15/5</div></div>
+
+    <div class="lane-cell lane-name">E01 · Anass</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur start</span>
+      <span class="wp-tag tone-idriss">Mix start</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag handoff">Mix naar Kiki</span>
+      <span class="wp-tag tone-kiki">Eindrender</span>
+      <div class="owner-row"><span class="owner tone-idriss">Idriss</span><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag master">Eindversie</span>
+      <span class="wp-tag tone-kiki">→ op server</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E02 · Sherel</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">V1 naar Iggy</span>
+      <span class="wp-tag tone-ben">Feedback</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v2</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v3</span>
+      <span class="wp-tag tone-ezhar">Graphics</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ezhar">Ezhar</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Laatste polijst</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag handoff">XML naar Kiki</span>
+      <span class="wp-tag handoff">AAF naar Idriss</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E03 · Dailon</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut start</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut v1</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut start</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 21 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 21</span>
+    <span class="week-dates">18 — 22 mei 2026</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">18/5</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">19/5</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">20/5</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">21/5</div></div>
+    <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">22/5</div></div>
+
+    <div class="lane-cell lane-name">E01 · Anass</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-ben">Final QC op server</span>
+      <div class="owner-row"><span class="owner tone-ben">Ben</span></div>
+    </div>
+    <div class="lane-cell empty"><span class="owner">klaar, wacht op lancering</span></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+
+    <div class="lane-cell lane-name">E02 · Sherel</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag handoff">Mix naar Kiki</span>
+      <span class="wp-tag tone-kiki">Eindrender</span>
+      <div class="owner-row"><span class="owner tone-idriss">Idriss</span><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag master">Eindversie</span>
+      <span class="wp-tag tone-kiki">→ op server</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E03 · Dailon</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">V1 naar Iggy</span>
+      <span class="wp-tag tone-ben">Feedback</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v2</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v3</span>
+      <span class="wp-tag tone-ezhar">Graphics</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ezhar">Ezhar</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Laatste polijst</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag handoff">Aanleveringen</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Rough cut v1</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">V1 naar Iggy</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-ben">Feedback</span>
+      <div class="owner-row"><span class="owner tone-ben">Ben</span><span class="owner tone-laila">Laila</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v2</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 22 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 22</span>
+    <span class="week-dates">25 — 29 mei 2026</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">25/5</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">26/5</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">27/5</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">28/5</div></div>
+    <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">29/5</div></div>
+
+    <div class="lane-cell lane-name">E01 · Anass</div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+
+    <div class="lane-cell lane-name">E02 · Sherel</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-ben">Final QC op server</span>
+      <div class="owner-row"><span class="owner tone-ben">Ben</span></div>
+    </div>
+    <div class="lane-cell empty"><span class="owner">klaar</span></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+
+    <div class="lane-cell lane-name">E03 · Dailon</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag handoff">Mix naar Kiki</span>
+      <span class="wp-tag tone-kiki">Eindrender</span>
+      <div class="owner-row"><span class="owner tone-idriss">Idriss</span><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag master">Eindversie</span>
+      <span class="wp-tag tone-kiki">→ op server</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Edit v3</span>
+      <span class="wp-tag tone-ezhar">Graphics</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-ezhar">Ezhar</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Laatste polijst</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Laatste polijst</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-cihad">Laatste polijst</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag lock">Beeld vast</span>
+      <span class="wp-tag handoff">Aanleveringen</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 23 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 23</span>
+    <span class="week-dates">1 — 5 juni 2026</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">1/6</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">2/6</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">3/6</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">4/6</div></div>
+    <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">5/6</div></div>
+
+    <div class="lane-cell lane-name">E01 · Anass</div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell lane-name">E02 · Sherel</div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell lane-name">E03 · Dailon</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-ben">Final QC op server</span>
+      <div class="owner-row"><span class="owner tone-ben">Ben</span></div>
+    </div>
+    <div class="lane-cell empty"><span class="owner">klaar</span></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+
+    <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-kiki">Kleur</span>
+      <span class="wp-tag tone-idriss">Mix</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag handoff">Mix naar Kiki</span>
+      <span class="wp-tag tone-kiki">Eindrender</span>
+      <div class="owner-row"><span class="owner tone-idriss">Idriss</span><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag master">Eindversie</span>
+      <span class="wp-tag tone-kiki">→ op server</span>
+      <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 24 — Launch prep -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 24</span>
+    <span class="week-dates">8 — 12 juni 2026 · voorbereiding lancering</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Track</div></div>
+    <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">8/6</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">9/6</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">10/6</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">11/6</div></div>
+    <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">12/6</div></div>
+
+    <div class="lane-cell lane-name">E04 · Final QC</div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-ben">Final QC E04 op server</span>
+      <div class="owner-row"><span class="owner tone-ben">Ben</span></div>
+    </div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div>
+
+    <div class="lane-cell lane-name">Titels + teksten</div>
+    <div class="lane-cell" style="grid-column: span 5;">
+      <span class="wp-tag tone-iggy">Iggy maakt titels + teksten E01-E04 af</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">Thumbnails</div>
+    <div class="lane-cell" style="grid-column: span 5;">
+      <span class="wp-tag tone-ezhar">Ezhar levert 4× thumbnail</span>
+      <div class="owner-row"><span class="owner tone-ezhar">Ezhar</span><span class="owner tone-iggy">Iggy</span><span class="owner tone-ben">Ben</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">Reels</div>
+    <div class="lane-cell" style="grid-column: span 5;">
+      <span class="wp-tag tone-iggy">Shortform-redactie zet ondertitels op reels E01-E04</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+
+    <div class="lane-cell lane-name">Ondertiteling</div>
+    <div class="lane-cell" style="grid-column: span 5;">
+      <span class="wp-tag tone-ben">Ondertiteling gegenereerd; namen nalopen</span>
+      <div class="owner-row"><span class="owner tone-ben">Ben</span><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 25 — Launch E01 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 25</span>
+    <span class="week-dates">15 — 19 juni 2026 · lancering E01</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head milestone"><div class="day-name">Maandag</div><div class="day-date">15/6</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">16/6</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">17/6</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">18/6</div></div>
+    <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">19/6</div></div>
+
+    <div class="lane-cell lane-name">E01 · Anass</div>
+    <div class="lane-cell">
+      <span class="wp-tag publish">Online</span>
+      <span class="wp-tag tone-iggy">Iggy haalt van server + zet op YouTube</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-iggy">Reel 1</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-iggy">Reel 2</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-iggy">Reel 3</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+    <div class="lane-cell">
+      <span class="wp-tag tone-iggy">Reel 4</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Week 26 — Launch E02 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 26</span>
+    <span class="week-dates">22 — 26 juni 2026 · lancering E02</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head milestone"><div class="day-name">Maandag</div><div class="day-date">22/6</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">23/6</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">24/6</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">25/6</div></div>
+    <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">26/6</div></div>
+
+    <div class="lane-cell lane-name">E02 · Sherel</div>
+    <div class="lane-cell">
+      <span class="wp-tag publish">Online</span>
+      <span class="wp-tag tone-iggy">Iggy haalt van server + zet op YouTube</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 1</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 2</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 3</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 4</span></div>
+  </div>
+</div>
+
+<!-- Week 27 — Launch E03 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 27</span>
+    <span class="week-dates">29 juni — 3 juli 2026 · lancering E03</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head milestone"><div class="day-name">Maandag</div><div class="day-date">29/6</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">30/6</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">1/7</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">2/7</div></div>
+    <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">3/7</div></div>
+
+    <div class="lane-cell lane-name">E03 · Dailon</div>
+    <div class="lane-cell">
+      <span class="wp-tag publish">Online</span>
+      <span class="wp-tag tone-iggy">Iggy haalt van server + zet op YouTube</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 1</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 2</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 3</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 4</span></div>
+  </div>
+</div>
+
+<!-- Week 28 — Launch E04 -->
+<div class="week-block">
+  <div class="week-head">
+    <span class="week-no">Week 28</span>
+    <span class="week-dates">6 — 10 juli 2026 · lancering E04</span>
+  </div>
+  <div class="week-grid">
+    <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
+    <div class="day-head milestone"><div class="day-name">Maandag</div><div class="day-date">6/7</div></div>
+    <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">7/7</div></div>
+    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">8/7</div></div>
+    <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">9/7</div></div>
+    <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">10/7</div></div>
+
+    <div class="lane-cell lane-name">E04 · Gravenberch</div>
+    <div class="lane-cell">
+      <span class="wp-tag publish">Online</span>
+      <span class="wp-tag tone-iggy">Iggy haalt van server + zet op YouTube</span>
+      <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
+    </div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 1</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 2</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 3</span></div>
+    <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 4</span></div>
+  </div>
+</div>
+
+</section>
+
+<!-- ─────────── TAB 2 — OVERZICHT ─────────── -->
+<section data-tab-panel="overview">
+<div class="container">
+
+<div class="kicker">NPO FunX · YouTube Serie 2026 · 4 Afleveringen</div>
+<h1>Het Pleintje <em>Van</em></h1>
+
+<div class="meta">
+  <div class="meta-item"><div class="label">Serie</div><div class="value">4 afl</div></div>
+  <div class="meta-item"><div class="label">Duur</div><div class="value">8 min</div></div>
+  <div class="meta-item"><div class="label">Lancering</div><div class="value">Medio juni</div></div>
+  <div class="meta-item"><div class="label">Review</div><div class="value">Frame.io</div></div>
+</div>
+
+<h2><span class="num">§ 02</span>Afleveringen &amp; mijlpalen</h2>
+<table>
+<thead><tr><th>Aflevering</th><th>Draaidag</th><th>Beeld vast</th><th>Online</th></tr></thead>
+<tbody>
+<tr><td><div class="aflevering"><strong>Anass Salah-Eddine</strong><span>E01 · Amsterdam</span></div></td><td>28 apr</td><td>8 mei</td><td>~15 jun</td></tr>
+<tr><td><div class="aflevering"><strong>Sherel Floranus</strong><span>E02 · Rotterdam</span></div></td><td>30 apr</td><td>15 mei</td><td>~22 jun</td></tr>
+<tr><td><div class="aflevering"><strong>Dailon Livramento</strong><span>E03 · locatie NTB</span></div></td><td>eerste 2 wk mei</td><td>22 mei</td><td>~29 jun</td></tr>
+<tr><td><div class="aflevering"><strong>Gravenberch (optie)</strong><span>E04 · locatie NTB</span></div></td><td>eerste 2 wk mei</td><td>29 mei</td><td>~6 jul</td></tr>
+</tbody>
+</table>
+
+<h2><span class="num">§ 03</span>Team &amp; rolverdeling</h2>
+<table>
+<thead><tr><th>Rol</th><th>Persoon</th></tr></thead>
+<tbody>
+<tr><td>Monteur, beeld, reels</td><td><span class="pill tone-cihad">Cihad</span></td></tr>
+<tr><td>Kleurcorrectie &amp; eindversie</td><td><span class="pill tone-kiki">Kiki Henger</span></td></tr>
+<tr><td>Geluid &amp; eindmix</td><td><span class="pill tone-idriss">Idriss</span></td></tr>
+<tr><td>Titels, graphics &amp; thumbnail</td><td><span class="pill tone-ezhar">Ezhar</span></td></tr>
+<tr><td>Muziek · creative producer</td><td><span class="pill tone-laila">Laila</span></td></tr>
+<tr><td>Bestandenbeheer</td><td><span class="pill tone-daniel">Daniel</span></td></tr>
+<tr><td>YouTube-beheer · titels, teksten</td><td><span class="pill tone-iggy">Iggy</span></td></tr>
+<tr><td>Productie-coördinator</td><td>Celine Santos Pires</td></tr>
+<tr><td>Eindredactie FunX</td><td>Ouassima</td></tr>
+<tr><td>Productieleiding &amp; final QC</td><td><span class="pill tone-ben">Ben Zoref</span></td></tr>
+</tbody>
+</table>
+
+<div class="intro-block">
+<h3>Server-workflow</h3>
+<p>Alles gaat via de FunX-server. Iedereen uploadt zijn werk daar; wij zorgen dat iedereen de juiste toegang heeft. Cihad doet in het weekend de nieuwe footage inladen en syncen zodat hij maandag kan starten op rough cut, parallel aan de review van de vorige aflevering.</p>
+<p>Cihad levert de montage-timeline (XML) met beeld én de graphics van Ezhar. Idriss stuurt de eindmix naar Kiki. Kiki rendert de eindversie; één bestand met beeld, graphics en geluid. Die zet ze op de server. Ben doet daar de final QC; Iggy haalt het bestand van de server en zet het op YouTube.</p>
+</div>
+
+</div>
+</section>
+
+<!-- ─────────── TAB 3 — TIMELINE (D+X) ─────────── -->
+<section data-tab-panel="timeline">
+
+<div class="wp-intro">
+<h2 style="margin-top: 20px;"><span class="num">§ 04</span>Tijdlijn per aflevering</h2>
+<p>Dagen geteld vanaf de draaidag (D+0). Elke rij is een persoon; balkkleur matcht de naam-pil. Wat naast elkaar staat gebeurt tegelijk; rode markeringen zijn harde mijlpalen.</p>
+</div>
+
+<div class="timeline-wrap">
+<div class="timeline-grid">
+
+  <div class="tl-axis-label">Dag vanaf draai</div>
+  <div class="tl-axis-tick strong">D+0</div>
+  <div class="tl-axis-tick">1</div><div class="tl-axis-tick">2</div><div class="tl-axis-tick">3</div>
+  <div class="tl-axis-tick">4</div><div class="tl-axis-tick">5</div><div class="tl-axis-tick">6</div>
+  <div class="tl-axis-tick accent">D+7</div>
+  <div class="tl-axis-tick">8</div><div class="tl-axis-tick">9</div><div class="tl-axis-tick">10</div>
+  <div class="tl-axis-tick">11</div><div class="tl-axis-tick">12</div><div class="tl-axis-tick">13</div>
+  <div class="tl-axis-tick strong">D+14</div>
+  <div class="tl-axis-tick">15</div><div class="tl-axis-tick">16</div><div class="tl-axis-tick">17</div>
+  <div class="tl-axis-tick">18</div><div class="tl-axis-tick">19</div>
+  <div class="tl-axis-tick accent">D+20</div>
+
+  <div class="tl-lane-label">Daniel<span class="lane-sub">Bestanden</span></div>
+  <div class="tl-cell"><span class="tl-bar span-to-2 tone-daniel">Bestanden op server</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+
+  <div class="tl-lane-label">Cihad<span class="lane-sub">Montage</span></div>
+  <div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-2 tone-cihad">Inladen + syncen (weekend)</span></div>
+  <div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-4 tone-cihad">Rough cut → v1</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar tone-cihad">V1 naar Iggy</span></div>
+  <div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-2 tone-cihad">Feedback verwerken</span></div>
+  <div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-4 tone-cihad">Edit v2/v3 + graphics erin</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar solid">Aanleveren</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+
+  <div class="tl-lane-label">Kiki<span class="lane-sub">Kleur + eindversie</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-12 tone-kiki">Kleurvoorbereiding (voor beeld vast)</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-4 tone-kiki">Eindkleurcorrectie + graphics afwerken</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar accent">EINDVERSIE → SERVER</span></div>
+
+  <div class="tl-lane-label">Idriss<span class="lane-sub">Geluid + mix</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-12 tone-idriss">Stem opschonen (voor beeld vast)</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-2 tone-idriss">Eindmix + geluidseffecten</span></div>
+  <div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar solid">Mix naar Kiki</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div>
+
+  <div class="tl-lane-label">Ezhar<span class="lane-sub">Titels &amp; graphics</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-4 tone-ezhar">Naamtitels + titels + eindkaart</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+
+  <div class="tl-lane-label">Laila<span class="lane-sub">Muziek</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar tone-laila">Feedback rd 1</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-2 tone-laila">Muziekstems naar Idriss</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+
+  <div class="tl-lane-label">Ben<span class="lane-sub">Final QC</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar tone-ben">Feedback V1</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar tone-ben">Final QC op server</span></div>
+
+  <div class="tl-lane-label">Iggy<span class="lane-sub">YouTube</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-8 tone-iggy">Titels + teksten na V1</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+
+  <div class="tl-lane-label">Reels<span class="lane-sub">Socials</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar span-to-8 tone-cihad">Cihad knipt 3-4× verticaal (9:16)</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+  <div class="tl-cell"><span class="tl-bar solid">naar shortform-redactie</span></div>
+  <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+
+</div>
+</div>
+
+<p style="font-size: 13px; color: var(--ink-soft); margin: 20px 32px 40px;"><strong style="color: var(--accent); font-weight: 600;">Kernmijlpalen:</strong> D+7 = V1 naar Iggy · D+14 = beeld vast (hard) · D+20 = eindversie op server · D+21 = Ben final QC · lancering via Iggy op YouTube.</p>
+
+</section>
+
+<!-- ─────────── TAB 4 — AANLEVERINGEN ─────────── -->
+<section data-tab-panel="specs">
+<div class="container">
+
+<h2><span class="num">§ 05</span>Aanleveringen &amp; specs</h2>
+
+<h3>Server &amp; mapstructuur</h3>
+<p>Alle werkbestanden staan in <code>/Beeld/1. FUNX CONTENT/02. YOUTUBE SERIES 2026/PLEINTJE VAN 2026/</code>. Iedereen uploadt zijn werk naar de server; wij regelen de toegang. De map is onderverdeeld in submappen per fase (sources, project files, exports, deliverables).</p>
+
+<h3>Weekend-ritme Cihad</h3>
+<p>Op de draaidag zorgt Daniel dat de bestanden op de server staan. In het weekend dat volgt pakt Cihad de nieuwe footage op, laadt die in Premiere en synct beeld met geluid. Maandag kan hij meteen beginnen met de rough cut, parallel aan de review van de vorige aflevering.</p>
+
+<h3>Cihad levert aan Kiki (D+15)</h3>
+<ul>
+<li>XML (montagebestand) met V1 beeld en V2 graphics van Ezhar, 24 frames extra ruimte per clip</li>
+<li>Referentie-video (ProRes Proxy 4K 25p) met timecode op beeld, bestandsnaam en gidsgeluid</li>
+<li>Camerametadata-sheet (kleurruimte, gamma, LUT)</li>
+<li>Toegang tot originele cameramedia op de server</li>
+</ul>
+
+<h3>Premiere-regels voor Cihad</h3>
+<ul>
+<li><strong><code>Set to Frame Size</code></strong>; nooit <code>Scale to Frame Size</code> (degradeert kwaliteit + XML-fouten bij Resolve)</li>
+<li>Snelheidseffecten (speed ramps, freeze frames) en bijzondere overgangen: vooraf renderen naar ProRes</li>
+<li>Geen beeldeffecten in Premiere (Lumetri, blurs); Kiki doet dat in Resolve</li>
+</ul>
+
+<h3>Cihad levert aan Idriss (D+15)</h3>
+<ul>
+<li>AAF-bestand met 10 seconden extra per clip, tracks gegroepeerd: dialoog lav/boom per speler, omgevingsgeluid, b-roll, tijdelijke muziek, effecten</li>
+<li>Referentie-video met timecode op beeld</li>
+<li>Volumenorm: richting −14 LUFS, niet over −1 dBTP</li>
+</ul>
+
+<h3>Ezhar (vóór beeld vast)</h3>
+<ul>
+<li>Naamtitels, titels, eindkaart; ProRes 4444 met alpha-laag (Straight, niet pre-multiplied)</li>
+<li><strong>Unieke bestandsnamen per aflevering</strong>; nooit <code>LT_01.mov</code> hergebruiken over E01—E04</li>
+<li>Thumbnails (1920×1080) naar Iggy + Ben</li>
+</ul>
+
+<h3>Idriss aan Kiki (D+18)</h3>
+<ul>
+<li>Eindmix: stereo WAV 48kHz/24-bit, met losse stems (dialoog, muziek, effecten) ernaast</li>
+<li>Alles op de server</li>
+</ul>
+
+<h3>Kiki → server (D+19/20)</h3>
+<ul>
+<li>Kiki rendert de eindversie: ProRes 422 HQ, 4K UHD 25p; beeld, graphics en geluid in één bestand</li>
+<li>Kiki uploadt de eindversie naar de server</li>
+</ul>
+
+<h3>Ben → final QC (D+21)</h3>
+<ul>
+<li>Ben checkt de eindversie op de server (beeld, geluid, graphics, ondertiteling)</li>
+<li>Bij akkoord staat het bestand klaar voor Iggy</li>
+</ul>
+
+<h3>Iggy → YouTube (lanceerdag)</h3>
+<ul>
+<li>Iggy haalt het bestand van de server</li>
+<li>Uploadt naar YouTube met titel, beschrijving, ondertiteling en thumbnail</li>
+</ul>
+
+<h2><span class="num">§ 06</span>Nog te bevestigen</h2>
+<ul>
+<li>Aflevering-titels; komt van Iggy zodra V1 binnen is</li>
+<li>NPO FunX huisstijl-richtlijnen checken met Ezhar (assets staan klaar in <code>/4. DESIGN/NPO FUNX/</code>)</li>
+<li>Server-toegang regelen voor Cihad, Kiki, Idriss, Ezhar, Laila, Iggy</li>
+</ul>
+
+</div>
+</section>
+
+<!-- ─────────── TAB 5 — CONTACT ─────────── -->
+<section data-tab-panel="contact">
+<div class="container">
+
+<h2><span class="num">§ 07</span>Contact</h2>
+<p>Alle contactpersonen op één plek. Kortste lijn is meestal WhatsApp naar Ben.</p>
+
+<table class="contact-table">
+<thead>
+<tr><th>Naam</th><th>Rol</th><th>Email</th><th>Telefoon</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td class="contact-name"><span class="pill tone-ben">Ben Zoref</span></td>
+  <td>Productieleider · final QC</td>
+  <td><a href="mailto:ben@funx.nl">ben@funx.nl</a></td>
+  <td><a href="tel:+31655150298">+31 6 5515 0298</a></td>
+</tr>
+<tr>
+  <td class="contact-name"><span class="pill tone-cihad">Cihad</span></td>
+  <td>Monteur, beeld, reels</td>
+  <td><span class="tbd">via RRfilms — TBD</span></td>
+  <td><a href="tel:+31646959479">+31 6 4695 9479</a></td>
+</tr>
+<tr>
+  <td class="contact-name"><span class="pill tone-kiki">Kiki Henger</span></td>
+  <td>Kleurcorrectie &amp; eindversie</td>
+  <td><span class="tbd">TBD</span></td>
+  <td><a href="tel:+31622932738">+31 6 2293 2738</a></td>
+</tr>
+<tr>
+  <td class="contact-name"><span class="pill tone-idriss">Idriss</span></td>
+  <td>Geluid &amp; eindmix</td>
+  <td><a href="mailto:Idriss@kalasoundproductions.nl">Idriss@kalasoundproductions.nl</a></td>
+  <td><a href="tel:+31611411657">+31 6 1141 1657</a></td>
+</tr>
+<tr>
+  <td class="contact-name"><span class="pill tone-ezhar">Ezhar</span></td>
+  <td>Titels, graphics &amp; thumbnail</td>
+  <td><a href="mailto:ezhar@funx.nl">ezhar@funx.nl</a></td>
+  <td><a href="tel:+31655152059">+31 6 5515 2059</a></td>
+</tr>
+<tr>
+  <td class="contact-name"><span class="pill tone-laila">Laila</span></td>
+  <td>Creative producer · muziek</td>
+  <td><a href="mailto:laila@funx.nl">laila@funx.nl</a></td>
+  <td><a href="tel:+31622334709">+31 6 2233 4709</a></td>
+</tr>
+<tr>
+  <td class="contact-name"><span class="pill tone-daniel">Daniel Lopes</span></td>
+  <td>Bestandenbeheer · videograaf</td>
+  <td><a href="mailto:daniel.lopes@funx.nl">daniel.lopes@funx.nl</a></td>
+  <td><span class="tbd">TBD</span></td>
+</tr>
+<tr>
+  <td class="contact-name"><span class="pill tone-iggy">Iggy</span></td>
+  <td>YouTube-beheer · titels + teksten</td>
+  <td><a href="mailto:iggy@funx.nl">iggy@funx.nl</a></td>
+  <td><a href="tel:+31643533605">+31 6 4353 3605</a></td>
+</tr>
+<tr>
+  <td class="contact-name">Celine Santos Pires</td>
+  <td>Productie-coördinator</td>
+  <td><a href="mailto:celine@funx.nl">celine@funx.nl</a></td>
+  <td><span class="tbd">TBD</span></td>
+</tr>
+<tr>
+  <td class="contact-name">Ouassima</td>
+  <td>Eindredactie FunX</td>
+  <td><a href="mailto:ouassima@funx.nl">ouassima@funx.nl</a></td>
+  <td><span class="tbd">TBD</span></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</section>
+
+<footer>
+Het Pleintje Van · NPO FunX 2026 · Productie: Ben Zoref · Laatste update 24 april 2026
+</footer>
+
+<script>
+document.querySelectorAll('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('[data-tab-panel]').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelector(`[data-tab-panel="${btn.dataset.tab}"]`).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
