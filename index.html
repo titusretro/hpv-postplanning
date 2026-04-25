@@ -359,8 +359,12 @@
   }
   .week-grid {
     display: grid;
-    grid-template-columns: 140px repeat(5, 1fr);
+    grid-template-columns: 140px repeat(7, 1fr);
   }
+  .day-head.weekend, .lane-cell.weekend {
+    background: var(--paper-warm);
+  }
+  .day-head.weekend .day-name { color: var(--ink-soft); }
   .day-head {
     padding: 14px 16px;
     background: var(--paper-warm);
@@ -400,7 +404,7 @@
     align-content: flex-start;
   }
   .lane-cell:last-child { border-right: none; }
-  .lane-cell:nth-last-child(-n+5) { border-bottom: none; }
+  .lane-cell:nth-last-child(-n+7) { border-bottom: none; }
   .lane-cell.lane-name {
     background: var(--paper-warm);
     font-family: 'Fraunces', serif;
@@ -875,7 +879,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 18</span>
-    <span class="week-dates">27 apr — 1 mei 2026</span>
+    <span class="week-dates">27 apr — 3 mei 2026</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -884,6 +888,8 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">29/4</div></div>
     <div class="day-head milestone"><div class="day-name">Donderdag</div><div class="day-date">30/4</div></div>
     <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">1/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">2/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">3/5</div></div>
 
     <div class="lane-cell lane-name">E01 · Anass<span class="loc">Amsterdam</span></div>
     <div class="lane-cell empty"></div>
@@ -903,6 +909,8 @@
       <span class="wp-tag tone-cihad">Rough cut start</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E02 · Sherel<span class="loc">Rotterdam</span></div>
     <div class="lane-cell empty"></div>
@@ -916,33 +924,35 @@
       <span class="wp-tag tone-daniel">Bestanden op server</span>
       <div class="owner-row"><span class="owner tone-daniel">Daniel</span></div>
     </div>
+    <div class="lane-cell weekend">
+      <span class="wp-tag tone-cihad">Inladen + syncen</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E03 · Dailon</div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
   </div>
-</div>
-
-<div class="weekend-strip">
-  <strong>Weekend 2-3 mei</strong>
-  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E02 op server</span>
 </div>
 
 <!-- Week 19 -->
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 19</span>
-    <span class="week-dates">4 — 8 mei 2026</span>
+    <span class="week-dates">4 — 10 mei 2026</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
     <div class="day-head"><div class="day-name">Maandag</div><div class="day-date">4/5</div></div>
     <div class="day-head"><div class="day-name">Dinsdag</div><div class="day-date">5/5</div></div>
-    <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">6/5</div></div>
+    <div class="day-head milestone"><div class="day-name">Woensdag</div><div class="day-date">6/5</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">7/5</div></div>
     <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">8/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">9/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">10/5</div></div>
 
     <div class="lane-cell lane-name">E01 · Anass</div>
     <div class="lane-cell">
@@ -969,6 +979,8 @@
       <span class="wp-tag handoff">AAF naar Idriss</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E02 · Sherel</div>
     <div class="lane-cell">
@@ -982,12 +994,14 @@
       <span class="wp-tag tone-cihad">Rough cut v1</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E03 · Dailon</div>
     <div class="lane-cell empty"></div>
     <div class="lane-cell empty"></div>
     <div class="lane-cell">
-      <span class="wp-tag draai">Draaidag (indicatie)</span>
+      <span class="wp-tag draai">Draai</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span><span class="owner tone-crew">Crew</span></div>
     </div>
     <div class="lane-cell">
@@ -995,22 +1009,22 @@
       <div class="owner-row"><span class="owner tone-daniel">Daniel</span></div>
     </div>
     <div class="lane-cell empty"></div>
+    <div class="lane-cell weekend">
+      <span class="wp-tag tone-cihad">Inladen + syncen</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
   </div>
-</div>
-
-<div class="weekend-strip">
-  <strong>Weekend 9-10 mei</strong>
-  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E03 op server</span>
 </div>
 
 <!-- Week 20 -->
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 20</span>
-    <span class="week-dates">11 — 15 mei 2026</span>
+    <span class="week-dates">11 — 17 mei 2026</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1019,6 +1033,8 @@
     <div class="day-head milestone"><div class="day-name">Woensdag</div><div class="day-date">13/5</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">14/5</div></div>
     <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">15/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">16/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">17/5</div></div>
 
     <div class="lane-cell lane-name">E01 · Anass</div>
     <div class="lane-cell">
@@ -1046,6 +1062,8 @@
       <span class="wp-tag tone-kiki">→ op server</span>
       <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E02 · Sherel</div>
     <div class="lane-cell">
@@ -1072,6 +1090,8 @@
       <span class="wp-tag handoff">AAF naar Idriss</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E03 · Dailon</div>
     <div class="lane-cell">
@@ -1085,6 +1105,8 @@
       <span class="wp-tag tone-cihad">Rough cut v1</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
     <div class="lane-cell empty"></div>
@@ -1100,19 +1122,19 @@
       <div class="owner-row"><span class="owner tone-daniel">Daniel</span><span class="owner tone-kiki">Kiki</span><span class="owner tone-idriss">Idriss</span></div>
     </div>
     <div class="lane-cell empty"></div>
+    <div class="lane-cell weekend">
+      <span class="wp-tag tone-cihad">Inladen + syncen</span>
+      <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
+    </div>
+    <div class="lane-cell weekend"></div>
   </div>
-</div>
-
-<div class="weekend-strip">
-  <strong>Weekend 16-17 mei</strong>
-  <span class="wp-tag tone-cihad">Cihad inlaadt + synct E04 op server</span>
 </div>
 
 <!-- Week 21 -->
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 21</span>
-    <span class="week-dates">18 — 22 mei 2026</span>
+    <span class="week-dates">18 — 24 mei 2026</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1121,6 +1143,8 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">20/5</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">21/5</div></div>
     <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">22/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">23/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">24/5</div></div>
 
     <div class="lane-cell lane-name">E01 · Anass</div>
     <div class="lane-cell">
@@ -1131,6 +1155,8 @@
     <div class="lane-cell empty"></div>
     <div class="lane-cell empty"></div>
     <div class="lane-cell empty"></div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E02 · Sherel</div>
     <div class="lane-cell">
@@ -1158,6 +1184,8 @@
       <span class="wp-tag tone-kiki">→ op server</span>
       <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E03 · Dailon</div>
     <div class="lane-cell">
@@ -1183,6 +1211,8 @@
       <span class="wp-tag handoff">Aanleveringen</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
     <div class="lane-cell">
@@ -1196,6 +1226,8 @@
       <span class="wp-tag tone-cihad">Rough cut v1</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
   </div>
 </div>
 
@@ -1203,7 +1235,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 22</span>
-    <span class="week-dates">25 — 29 mei 2026</span>
+    <span class="week-dates">25 — 31 mei 2026</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1212,9 +1244,11 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">27/5</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">28/5</div></div>
     <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">29/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">30/5</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">31/5</div></div>
 
     <div class="lane-cell lane-name">E01 · Anass</div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E02 · Sherel</div>
     <div class="lane-cell">
@@ -1222,7 +1256,7 @@
       <div class="owner-row"><span class="owner tone-ben">Ben</span></div>
     </div>
     <div class="lane-cell empty"><span class="owner">klaar</span></div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E03 · Dailon</div>
     <div class="lane-cell">
@@ -1250,6 +1284,8 @@
       <span class="wp-tag tone-kiki">→ op server</span>
       <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
     <div class="lane-cell">
@@ -1275,6 +1311,8 @@
       <span class="wp-tag handoff">Aanleveringen</span>
       <div class="owner-row"><span class="owner tone-cihad">Cihad</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
   </div>
 </div>
 
@@ -1282,7 +1320,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 23</span>
-    <span class="week-dates">1 — 5 juni 2026</span>
+    <span class="week-dates">1 — 7 juni 2026</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1291,18 +1329,20 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">3/6</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">4/6</div></div>
     <div class="day-head milestone"><div class="day-name">Vrijdag</div><div class="day-date">5/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">6/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">7/6</div></div>
 
     <div class="lane-cell lane-name">E01 · Anass</div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
     <div class="lane-cell lane-name">E02 · Sherel</div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
     <div class="lane-cell lane-name">E03 · Dailon</div>
     <div class="lane-cell">
       <span class="wp-tag tone-ben">Final QC op server</span>
       <div class="owner-row"><span class="owner tone-ben">Ben</span></div>
     </div>
     <div class="lane-cell empty"><span class="owner">klaar</span></div>
-    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div>
+    <div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell empty"></div><div class="lane-cell weekend"></div><div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
     <div class="lane-cell">
@@ -1330,6 +1370,8 @@
       <span class="wp-tag tone-kiki">→ op server</span>
       <div class="owner-row"><span class="owner tone-kiki">Kiki</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
   </div>
 </div>
 
@@ -1337,7 +1379,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 24</span>
-    <span class="week-dates">8 — 12 juni 2026 · voorbereiding lancering</span>
+    <span class="week-dates">8 — 14 juni 2026 · voorbereiding lancering</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Track</div></div>
@@ -1346,6 +1388,8 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">10/6</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">11/6</div></div>
     <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">12/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">13/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">14/6</div></div>
 
     <div class="lane-cell lane-name">E04 · Final QC</div>
     <div class="lane-cell">
@@ -1356,27 +1400,29 @@
     <div class="lane-cell empty"></div>
     <div class="lane-cell empty"></div>
     <div class="lane-cell empty"></div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
 
     <div class="lane-cell lane-name">Titels + teksten</div>
-    <div class="lane-cell" style="grid-column: span 5;">
+    <div class="lane-cell" style="grid-column: span 7;">
       <span class="wp-tag tone-iggy">Iggy maakt titels + teksten E01-E04 af</span>
       <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
     </div>
 
     <div class="lane-cell lane-name">Thumbnails</div>
-    <div class="lane-cell" style="grid-column: span 5;">
+    <div class="lane-cell" style="grid-column: span 7;">
       <span class="wp-tag tone-ezhar">Ezhar levert 4× thumbnail</span>
       <div class="owner-row"><span class="owner tone-ezhar">Ezhar</span><span class="owner tone-iggy">Iggy</span><span class="owner tone-ben">Ben</span></div>
     </div>
 
     <div class="lane-cell lane-name">Reels</div>
-    <div class="lane-cell" style="grid-column: span 5;">
+    <div class="lane-cell" style="grid-column: span 7;">
       <span class="wp-tag tone-iggy">Shortform-redactie zet ondertitels op reels E01-E04</span>
       <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
     </div>
 
     <div class="lane-cell lane-name">Ondertiteling</div>
-    <div class="lane-cell" style="grid-column: span 5;">
+    <div class="lane-cell" style="grid-column: span 7;">
       <span class="wp-tag tone-ben">Ondertiteling gegenereerd; namen nalopen</span>
       <div class="owner-row"><span class="owner tone-ben">Ben</span><span class="owner tone-iggy">Iggy</span></div>
     </div>
@@ -1387,7 +1433,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 25</span>
-    <span class="week-dates">15 — 19 juni 2026 · lancering E01</span>
+    <span class="week-dates">15 — 21 juni 2026 · lancering E01</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1396,6 +1442,8 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">17/6</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">18/6</div></div>
     <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">19/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">20/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">21/6</div></div>
 
     <div class="lane-cell lane-name">E01 · Anass</div>
     <div class="lane-cell">
@@ -1419,6 +1467,8 @@
       <span class="wp-tag tone-iggy">Reel 4</span>
       <div class="owner-row"><span class="owner tone-iggy">Iggy</span></div>
     </div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
   </div>
 </div>
 
@@ -1426,7 +1476,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 26</span>
-    <span class="week-dates">22 — 26 juni 2026 · lancering E02</span>
+    <span class="week-dates">22 — 28 juni 2026 · lancering E02</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1435,6 +1485,8 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">24/6</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">25/6</div></div>
     <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">26/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">27/6</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">28/6</div></div>
 
     <div class="lane-cell lane-name">E02 · Sherel</div>
     <div class="lane-cell">
@@ -1446,6 +1498,8 @@
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 2</span></div>
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 3</span></div>
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 4</span></div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
   </div>
 </div>
 
@@ -1453,7 +1507,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 27</span>
-    <span class="week-dates">29 juni — 3 juli 2026 · lancering E03</span>
+    <span class="week-dates">29 juni — 5 juli 2026 · lancering E03</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1462,6 +1516,8 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">1/7</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">2/7</div></div>
     <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">3/7</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">4/7</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">5/7</div></div>
 
     <div class="lane-cell lane-name">E03 · Dailon</div>
     <div class="lane-cell">
@@ -1473,6 +1529,8 @@
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 2</span></div>
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 3</span></div>
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 4</span></div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
   </div>
 </div>
 
@@ -1480,7 +1538,7 @@
 <div class="week-block">
   <div class="week-head">
     <span class="week-no">Week 28</span>
-    <span class="week-dates">6 — 10 juli 2026 · lancering E04</span>
+    <span class="week-dates">6 — 12 juli 2026 · lancering E04</span>
   </div>
   <div class="week-grid">
     <div class="day-head lane-label"><div class="day-name">Aflevering</div></div>
@@ -1489,6 +1547,8 @@
     <div class="day-head"><div class="day-name">Woensdag</div><div class="day-date">8/7</div></div>
     <div class="day-head"><div class="day-name">Donderdag</div><div class="day-date">9/7</div></div>
     <div class="day-head"><div class="day-name">Vrijdag</div><div class="day-date">10/7</div></div>
+    <div class="day-head weekend"><div class="day-name">Zaterdag</div><div class="day-date">11/7</div></div>
+    <div class="day-head weekend"><div class="day-name">Zondag</div><div class="day-date">12/7</div></div>
 
     <div class="lane-cell lane-name">E04 · Gravenberch</div>
     <div class="lane-cell">
@@ -1500,6 +1560,8 @@
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 2</span></div>
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 3</span></div>
     <div class="lane-cell"><span class="wp-tag tone-iggy">Reel 4</span></div>
+    <div class="lane-cell weekend"></div>
+    <div class="lane-cell weekend"></div>
   </div>
 </div>
 
