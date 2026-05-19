@@ -1,0 +1,1097 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dailon Livramento - Redactioneel dossier</title>
+  <style>
+    :root {
+      --paper: #fbfaf7;
+      --surface: #ffffff;
+      --surface-soft: #f7f6f3;
+      --ink: #20201d;
+      --ink-soft: #4d4c48;
+      --muted: #7d7a72;
+      --line: #e8e4dc;
+      --line-dark: #d7d1c7;
+      --blue-bg: #e8f2f8;
+      --blue: #255f82;
+      --green-bg: #edf3ec;
+      --green: #346538;
+      --red-bg: #fdebec;
+      --red: #9f2f2d;
+      --yellow-bg: #fbf3db;
+      --yellow: #8a6200;
+      --mono: "SF Mono", "Geist Mono", ui-monospace, Menlo, Consolas, monospace;
+      --sans: "SF Pro Display", "Geist Sans", "Helvetica Neue", Arial, sans-serif;
+      --serif: "Newsreader", "Lyon Text", Georgia, serif;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      line-height: 1.62;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-color: rgba(32, 32, 29, 0.22);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      text-decoration-color: rgba(32, 32, 29, 0.65);
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border: 1px solid rgba(32, 32, 29, 0.06);
+      white-space: nowrap;
+    }
+
+    .tag.green { background: var(--green-bg); color: var(--green); }
+    .tag.blue { background: var(--blue-bg); color: var(--blue); }
+    .tag.red { background: var(--red-bg); color: var(--red); }
+    .tag.yellow { background: var(--yellow-bg); color: var(--yellow); }
+    .tag.neutral { background: var(--surface-soft); color: var(--ink-soft); }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      color: var(--ink);
+    }
+
+    h1 {
+      max-width: 930px;
+      font-family: var(--serif);
+      font-size: clamp(52px, 8vw, 104px);
+      font-weight: 500;
+      letter-spacing: -0.045em;
+      line-height: 0.92;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 26px 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.45;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 40px;
+      align-items: start;
+      padding-top: 40px;
+    }
+
+    .toc {
+      position: sticky;
+      top: 24px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(12px);
+    }
+
+    .toc-title {
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .toc a {
+      display: block;
+      padding: 7px 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.25;
+      text-decoration: none;
+      border-top: 1px solid transparent;
+    }
+
+    .toc a:hover {
+      color: var(--ink);
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    section {
+      scroll-margin-top: 28px;
+      padding: 52px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:first-child {
+      padding-top: 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-index {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.02;
+    }
+
+    h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    h4 {
+      margin: 20px 0 8px;
+      color: var(--ink-soft);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: var(--ink-soft);
+      font-size: 17px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(32, 32, 29, 0.04);
+    }
+
+    .card.compact {
+      padding: 18px;
+    }
+
+    .pull {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.16;
+      letter-spacing: -0.025em;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .meta {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .meta span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .meta b {
+      display: block;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    th {
+      color: var(--muted);
+      background: var(--surface-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td {
+      color: var(--ink-soft);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 16px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .num {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line-dark);
+      border-radius: 8px;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--surface-soft);
+    }
+
+    ul.clean,
+    ol.clean {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--ink-soft);
+    }
+
+    ul.clean li,
+    ol.clean li {
+      margin: 8px 0;
+      padding-left: 3px;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .question-group {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .question-group ol {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--ink-soft);
+    }
+
+    .question-group li {
+      margin: 9px 0;
+      line-height: 1.45;
+    }
+
+    .scenario {
+      border-top: 4px solid var(--line-dark);
+    }
+
+    .scenario.portugal {
+      border-top-color: #c6d9df;
+    }
+
+    .scenario.rotterdam {
+      border-top-color: #d6c9b7;
+    }
+
+    .source-list {
+      columns: 2;
+      column-gap: 32px;
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .source-list li {
+      break-inside: avoid;
+      margin: 0 0 10px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        position: static;
+      }
+
+      .meta-grid,
+      .grid.three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 28px 16px 64px;
+      }
+
+      .topbar,
+      .section-head {
+        display: block;
+      }
+
+      .hero {
+        padding: 48px 0 36px;
+      }
+
+      .grid.two,
+      .grid.three,
+      .meta-grid,
+      .question-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: normal;
+      }
+
+      .source-list {
+        columns: 1;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        max-width: none;
+        padding: 0;
+      }
+
+      .toc,
+      .topbar {
+        display: none;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      section {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div>Het Pleintje Van · Redactioneel dossier</div>
+      <div>Bijgewerkt 17 mei 2026</div>
+    </header>
+
+    <section class="hero reveal">
+      <div class="kicker">
+        <span class="tag neutral">Leesversie</span>
+        <span class="tag blue">Dailon Livramento</span>
+        <span class="tag green">Kaapverdië</span>
+        <span class="tag yellow">Portugal / Rotterdam</span>
+      </div>
+      <h1>Dailon Livramento</h1>
+      <p class="subtitle">Rotterdamse aanvaller, international van Kaapverdië, gehuurd door Casa Pia van Hellas Verona. Niet-lineaire route, dansachtergrond, WK-historie en actuele clubdruk.</p>
+      <div class="meta-grid">
+        <div class="meta"><span>Geboren</span><b>4 mei 2001, Rotterdam</b></div>
+        <div class="meta"><span>Club</span><b>Casa Pia AC</b></div>
+        <div class="meta"><span>Contract</span><b>Hellas Verona tot 2028</b></div>
+        <div class="meta"><span>Actueel</span><b>Play-off tegen Torreense</b></div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="toc">
+        <div class="toc-title">Inhoud</div>
+        <a href="#draai-context">Draai-context</a>
+        <a href="#summary">Executive summary</a>
+        <a href="#hoofdhaken">Hoofdhaken</a>
+        <a href="#factcheck">Factcheck</a>
+        <a href="#feitenkaart">Feitenkaart</a>
+        <a href="#chronologie">Chronologie</a>
+        <a href="#verhaallijnen">Verhaallijnen</a>
+        <a href="#strategie">Interviewstrategie</a>
+        <a href="#vragen">Interviewvragen</a>
+        <a href="#scenes">Scenes en b-roll</a>
+        <a href="#structuur">Afleveringstructuur</a>
+        <a href="#valkuilen">Valkuilen</a>
+        <a href="#onzekerheden">Onzekerheden</a>
+        <a href="#checklist">Checklijst</a>
+        <a href="#bronnen">Bronnen</a>
+      </aside>
+
+      <div class="content">
+        <section id="draai-context" class="reveal">
+          <div class="section-head">
+            <h2>Draai-context</h2>
+            <span class="section-index">01</span>
+          </div>
+          <div class="grid two">
+            <article class="card scenario portugal">
+              <span class="tag blue">Scenario A</span>
+              <h3>Portugal</h3>
+              <p>De jongen van het Rotterdamse pleintje staat nu in Portugal, in een tussenfase van zijn carrière, met Kaapverdië in zijn rug en een WK voor zich.</p>
+              <p>Portugal is zijn actuele werkplek en bewijsfase. Casa Pia speelde op zaterdag 16 mei 2026 met 1-1 gelijk tegen Rio Ave, eindigde als nummer 16 en moet een play-off tegen Torreense spelen.</p>
+            </article>
+            <article class="card scenario rotterdam">
+              <span class="tag yellow">Scenario B</span>
+              <h3>Nederland / Rotterdam</h3>
+              <p>We kunnen letterlijk terug naar zijn roots. Dan wordt de aflevering klassieker voor Het Pleintje Van: het oude pleintje, familie, muziek, dans, en de route die daar begon.</p>
+              <p>De actuele Portugal/Casa Pia-spanning blijft belangrijk, maar wordt dan de laag later in het gesprek: waar staat hij nu?</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="summary" class="reveal">
+          <div class="section-head">
+            <h2>Executive summary</h2>
+            <span class="section-index">02</span>
+          </div>
+          <div class="pull">Hoe neem je ritme, familie en roots mee naar elke nieuwe plek waar je jezelf opnieuw moet bewijzen?</div>
+          <div class="grid three" style="margin-top:16px">
+            <article class="card compact">
+              <span class="tag neutral">Route</span>
+              <p>Geen klassieke jeugdtopper, maar een speler die via Excelsior Maassluis, NAC O19, Roda JC en MVV laat bovenkwam.</p>
+            </article>
+            <article class="card compact">
+              <span class="tag green">Eigenheid</span>
+              <p>Muzikale Kaapverdiaanse familie, broer Jerr van Broederliefde, en een jeugdperiode waarin dans belangrijker werd dan voetbal.</p>
+            </article>
+            <article class="card compact">
+              <span class="tag blue">Lading</span>
+              <p>In 2025 werd hij een van de gezichten van Kaapverdië's eerste WK-kwalificatie ooit.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="hoofdhaken" class="reveal">
+          <div class="section-head">
+            <h2>Hoofdhaken</h2>
+            <span class="section-index">03</span>
+          </div>
+          <div class="grid two">
+            <article class="card scenario portugal">
+              <span class="tag blue">Portugal</span>
+              <h3>Clubdruk en nationale status</h3>
+              <p><strong>Logline:</strong> De Rotterdamse laatbloeier die via dans, MVV en Verona bij Casa Pia terechtkwam, draagt nu in Portugal de spanning van twee werelden: clubmatig opnieuw vechten voor zijn plek, terwijl hij voor Kaapverdië al een nationale WK-held is.</p>
+              <p><strong>Emotionele vraag:</strong> Hoe blijf je jezelf als je thuisland je al op handen draagt, maar je clubcarrière je nog elke week opnieuw test?</p>
+              <p><strong>Openingsprincipe:</strong> open met plaats en lichaam. Portugal als huidige plek, Rotterdam als plek die hij in zich meedraagt.</p>
+            </article>
+            <article class="card scenario rotterdam">
+              <span class="tag yellow">Nederland / Rotterdam</span>
+              <h3>Terug op oude grond</h3>
+              <p><strong>Logline:</strong> De Rotterdamse laatbloeier die Kaapverdië richting het WK schoot, keert terug naar het pleintje waar zijn voetenwerk, ritme en omweg begonnen.</p>
+              <p><strong>Emotionele vraag:</strong> Wat gebeurt er als je als WK-held terugstaat op de plek waar je ooit gewoon een jongen met een bal was?</p>
+              <p><strong>Openingsprincipe:</strong> open letterlijk op het pleintje. Laat hem aanwijzen waar hij vroeger speelde, welke regel daar gold, en welke beweging hij daar leerde.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="factcheck" class="reveal">
+          <div class="section-head">
+            <h2>Factcheck-status</h2>
+            <span class="section-index">04</span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Claim</th><th>Status</th><th>Gebruik</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Geboren in Rotterdam</td><td>Sterk bevestigd via Transfermarkt, ESPN/FotMob-profielen en brede mediaconsensus.</td><td><span class="tag green">Veilig</span></td></tr>
+              <tr><td>Geboortedatum 4 mei 2001</td><td>Sterkste lezing. Enkele clubnabije publicaties wijken af.</td><td><span class="tag yellow">Check intern</span></td></tr>
+              <tr><td>Casa Pia op huurbasis van Hellas Verona</td><td>Bevestigd door Transfermarkt, Portugese media en Hellas-loanbericht.</td><td><span class="tag green">Veilig</span></td></tr>
+              <tr><td>Casa Pia naar play-off tegen Torreense</td><td>Bevestigd door Portugese bronnen op 16 mei 2026. RTP meldt eerst uit, daarna thuis, met 23/29 mei als voorlopige data.</td><td><span class="tag blue">Relevant</span></td></tr>
+              <tr><td>Casa Pia - Rio Ave werd 1-1</td><td>Bevestigd door Sofascore, Renascença en meerdere live-score bronnen. Larrazabal scoorde, Jalen Blesa maakte gelijk.</td><td><span class="tag green">Veilig</span></td></tr>
+              <tr><td>Dailon gaf assist op Larrazabal</td><td>Sofascore en Corriere dello Sport tonen Dailon als assistgever bij de 1-0.</td><td><span class="tag yellow">Official sheet checken</span></td></tr>
+              <tr><td>Eerste profmoment Roda - FC Den Bosch</td><td>Roda JC-bron: debuut, basisplaats, goal, 2-1 winst op 26 oktober 2021.</td><td><span class="tag green">Veilig</span></td></tr>
+              <tr><td>FC Volendam als debuutgoal</td><td>Onjuist of verwarrend in eerdere externe research.</td><td><span class="tag red">Niet gebruiken</span></td></tr>
+              <tr><td>MVV 2023/24: 16 competitiegoals</td><td>Sterk bevestigd via databronnen en mediabronnen.</td><td><span class="tag green">Veilig</span></td></tr>
+              <tr><td>Interlandcaps en goals</td><td>Bronnen lopen uiteen.</td><td><span class="tag yellow">Laatste check</span></td></tr>
+              <tr><td>Dansverleden</td><td>Meerdere media noemen het, details moeten bij Dailon worden gecheckt.</td><td><span class="tag yellow">Als vraag gebruiken</span></td></tr>
+              <tr><td>Familie: moeder, vader, broer Jerr</td><td>Breed gerapporteerd, maar persoonlijke formulering checken.</td><td><span class="tag yellow">Met toestemming</span></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="feitenkaart" class="reveal">
+          <div class="section-head">
+            <h2>Feitenkaart</h2>
+            <span class="section-index">05</span>
+          </div>
+          <table>
+            <tbody>
+              <tr><th>Volledige naam</th><td>Dailon Rocha Livramento do Rosario / do Rosário</td></tr>
+              <tr><th>Geboren</th><td>Waarschijnlijk 4 mei 2001, Rotterdam</td></tr>
+              <tr><th>Leeftijd</th><td>25</td></tr>
+              <tr><th>Sportnationaliteit</th><td>Kaapverdië</td></tr>
+              <tr><th>Geboorteland</th><td>Nederland</td></tr>
+              <tr><th>Positie</th><td>Aanvaller, vooral centrumspits; ook gebruikt vanaf de zijkant</td></tr>
+              <tr><th>Lengte / voet</th><td>1,85 m; rechts</td></tr>
+              <tr><th>Huidige club</th><td>Casa Pia AC</td></tr>
+              <tr><th>Contractstatus</th><td>Gehuurd van Hellas Verona tot einde seizoen 2025/26; Hellas-contract tot 30 juni 2028</td></tr>
+              <tr><th>Rugnummer</th><td>10</td></tr>
+              <tr><th>Seniorclubs</th><td>Roda JC, MVV Maastricht, Hellas Verona, Casa Pia</td></tr>
+              <tr><th>Clubmoment</th><td>Scoren bij Serie A-debuut tegen Napoli op 18 augustus 2024</td></tr>
+              <tr><th>Interlandmoment</th><td>Goals in Kaapverdië's historische WK-kwalificatiecampagne, waaronder Kameroen en Eswatini</td></tr>
+              <tr><th>Actuele spanning</th><td>Clubmatig vechten in Portugal, internationaal al onderdeel van een nationale mythe</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="chronologie" class="reveal">
+          <div class="section-head">
+            <h2>Chronologie</h2>
+            <span class="section-index">06</span>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="num">01</div>
+              <div>
+                <h3>Rotterdam, familie en beweging</h3>
+                <p>Dailon wordt geboren in Rotterdam in een Kaapverdiaanse familie. Zijn familiecontext is sterk: moeder wordt in media genoemd als zangeres, vader als dj, broer Jerzy/Jerr als lid van Broederliefde en in sommige stukken ook als zaakwaarnemer.</p>
+                <p><strong>Vraagrichting:</strong> hoe klonk zijn huis vroeger? Wanneer was voetbal sport, en wanneer was het performance?</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="num">02</div>
+              <div>
+                <h3>Dans als jeugdkeuze</h3>
+                <p>Meerdere profielen beschrijven dat Dailon rond zijn twaalfde tijdelijk stopte met voetbal om te dansen. Michael Jackson wordt genoemd als inspiratie; details moeten voor uitzending worden geverifieerd.</p>
+                <p><strong>Vraag:</strong> wat leerde dans hem over zijn lichaam dat voetbal hem niet leerde?</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="num">03</div>
+              <div>
+                <h3>Geen rechte jeugdroute</h3>
+                <p>Zijn route liep niet via Ajax, PSV of Feyenoord als voorbestemde topjongen. Open bronnen noemen Excelsior, RV&amp;AV Sparta Rotterdam, Excelsior Maassluis en daarna NAC Breda O19.</p>
+                <p><strong>Betekenis:</strong> hij was geen labeltalent. Hij moest later opnieuw binnenkomen.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="num">04</div>
+              <div>
+                <h3>Roda JC: eerste tastbare profmoment</h3>
+                <p>Op 26 oktober 2021 start hij voor Roda JC tegen FC Den Bosch in de KNVB Beker. Roda noemt hem debutant; hij scoort de 1-1 en Roda wint 2-1.</p>
+                <p><strong>Vraag:</strong> wat gebeurde er in je hoofd na die eerste goal voor Roda?</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="num">05</div>
+              <div>
+                <h3>MVV: wachten, kans pakken, ontploffen</h3>
+                <p>In 2022 tekent hij bij MVV. In 2023/24 kantelt het: na het vertrek van Koen Kostons krijgt hij meer ruimte en groeit hij uit tot bepalende aanvaller. Hij eindigt dat seizoen met 16 competitiegoals.</p>
+                <p><strong>Vraag:</strong> hoe blijf je rustig als de club om je heen niet rustig is?</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="num">06</div>
+              <div>
+                <h3>Hellas Verona: droomstart en werkelijkheid</h3>
+                <p>Op 24 juli 2024 tekent hij bij Hellas Verona. Op 18 augustus 2024 scoort hij meteen bij zijn Serie A-debuut in de 3-0 tegen Napoli. Daarna werd duidelijk hoe hard Serie A is.</p>
+                <p><strong>Vraag:</strong> wat zag de Serie A in jouw spel dat de KKD nog niet had blootgelegd?</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="num">07</div>
+              <div>
+                <h3>Casa Pia en Portugal: actuele bewijsfase</h3>
+                <p>Op 16 mei 2026 speelde Casa Pia 1-1 tegen Rio Ave. Door die uitslag en de late gelijkmaker van Estrela da Amadora tegen Braga eindigde Casa Pia als nummer 16. De club moet tegen Torreense de play-off om lijfsbehoud spelen.</p>
+                <p><strong>Vraag:</strong> hoe is het om nationaal een held te zijn, terwijl je bij je club nog elke dag opnieuw moet vechten?</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="num">08</div>
+              <div>
+                <h3>Kaapverdië: nationale geschiedenis</h3>
+                <p>Hij scoorde in de WK-kwalificatie tegen Angola, Kameroen en Eswatini. Kaapverdië plaatste zich voor het eerst voor een WK.</p>
+                <p><strong>Vraag:</strong> wat betekent het om iets terug te geven aan een land dat je via familie, taal, eten, muziek en verhalen hebt meegekregen?</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="verhaallijnen" class="reveal">
+          <div class="section-head">
+            <h2>Grote verhaallijnen</h2>
+            <span class="section-index">07</span>
+          </div>
+          <div class="grid three">
+            <article class="card"><span class="tag yellow">Plek</span><h3>Het pleintje</h3><p>Als we in Nederland draaien, is het pleintje letterlijk het startpunt. Als we in Portugal draaien, zit het pleintje in zijn hoofd.</p></article>
+            <article class="card"><span class="tag blue">Beweging</span><h3>Dansvloer naar strafschopgebied</h3><p>Voeten, ritme, balans. Laat hem tonen hoe een dansbeweging en een voetbalactie familie van elkaar zijn.</p></article>
+            <article class="card"><span class="tag green">Familie</span><h3>Basis, geen gimmick</h3><p>Jerr/Broederliefde is herkenbaar, maar familie moet de bodem zijn: muziek thuis, vertrouwen, zichtbaarheid.</p></article>
+            <article class="card"><span class="tag neutral">Route</span><h3>Laatbloeier zonder rancune</h3><p>Hij is interessant omdat hij steeds moest wachten en toch bleef gaan. Maak de route niet zielig. Maak hem precies.</p></article>
+            <article class="card"><span class="tag red">Spanning</span><h3>Clubspeler versus nationale held</h3><p>Bij Kaapverdië is hij onderdeel van nationale geschiedenis. Bij Casa Pia zit hij in een moeilijke clubfase.</p></article>
+            <article class="card"><span class="tag green">Identiteit</span><h3>Diaspora zonder cliché</h3><p>Niet framen als tweede keuze. Vraag naar verbondenheid, ouders/grootouders, Rotterdamse Kaapverdianen en representatie.</p></article>
+          </div>
+        </section>
+
+        <section id="strategie" class="reveal">
+          <div class="section-head">
+            <h2>Interviewstrategie</h2>
+            <span class="section-index">08</span>
+          </div>
+          <div class="grid two">
+            <article class="card scenario portugal">
+              <span class="tag blue">Portugal</span>
+              <h3>Begin in het nu</h3>
+              <p>Niet bij jeugd, niet bij Wikipedia, niet bij Napoli. Begin op de plek waar hij nu is.</p>
+              <p><strong>Eerste vraag:</strong> We staan nu niet op je pleintje in Rotterdam, maar hier in Portugal. Wat van dat pleintje heb je hier nog bij je?</p>
+            </article>
+            <article class="card scenario rotterdam">
+              <span class="tag yellow">Nederland / Rotterdam</span>
+              <h3>Begin op roots</h3>
+              <p>Niet eerst Casa Pia, niet eerst WK, niet eerst Broederliefde. Laat het pleintje het bewijs leveren.</p>
+              <p><strong>Eerste vraag:</strong> Wat is de eerste plek op dit pleintje waar je naartoe kijkt als je hier terugkomt?</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="vragen" class="reveal">
+          <div class="section-head">
+            <h2>Interviewvragen</h2>
+            <span class="section-index">09</span>
+          </div>
+          <div class="question-grid">
+            <article class="question-group">
+              <h3>Nederland / Rotterdam startvragen</h3>
+              <ol>
+                <li>Wat is de eerste plek op dit pleintje waar je automatisch naar kijkt?</li>
+                <li>Waar stond jij vroeger meestal: in de goal, aan de zijkant, of juist bij de oudere jongens?</li>
+                <li>Welke regel gold hier die je nergens op een clubtraining leerde?</li>
+                <li>Welke beweging heb je hier geleerd die nog steeds in je spel zit?</li>
+                <li>Wat voelt anders nu je hier terugstaat als international van Kaapverdië?</li>
+                <li>Als een jonge speler hier denkt dat hij te laat is, wat zou jij hem zeggen?</li>
+                <li>Waar zat dans in jouw leven toen je nog hier in Rotterdam rondliep?</li>
+                <li>Wat van dit pleintje nam je mee naar Maastricht, Verona en Portugal?</li>
+                <li>Is dit voor jou vooral je oude plek, of ook een plek van bewijs?</li>
+                <li>Wie uit je familie zou dit pleintje meteen herkennen als jouw plek?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Portugal en het nu</h3>
+              <ol>
+                <li>We draaien niet in Rotterdam, maar in Portugal. Wat zegt deze plek over waar jij nu staat?</li>
+                <li>Wat van je oude pleintje neem je mee naar een trainingsveld in Portugal?</li>
+                <li>Hoe voelt het om in Portugal te zitten tussen een historische WK-kwalificatie en een moeilijke clubfase?</li>
+                <li>Casa Pia zit in een spannende fase. Hoe houd je je hoofd vrij als het om handhaving/play-offs gaat?</li>
+                <li>Is deze huurperiode voor jou vooral speeltijd, ontwikkeling, reset, of bewijsdrang?</li>
+                <li>Wat moet mensen over jouw Casa Pia-periode weten dat je niet in goals of assists ziet?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Pleintje en roots vanuit afstand</h3>
+              <ol start="7">
+                <li>Als we nu naar jouw Rotterdamse pleintje zouden rijden, wat zou je ons als eerste aanwijzen?</li>
+                <li>Welke regel gold daar die je nergens anders leerde?</li>
+                <li>Welke beweging heb je op straat geleerd die nog steeds in je spel zit?</li>
+                <li>Wanneer voelde je als kind dat voetbal vrijheid was?</li>
+                <li>Wat mis je aan Rotterdam als je in Italië of Portugal zit?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Dans en ritme</h3>
+              <ol start="12">
+                <li>Klopt het dat je rond je twaalfde even stopte met voetbal om te dansen?</li>
+                <li>Wat gaf dansen jou dat voetbal toen niet gaf?</li>
+                <li>Wie was belangrijker voor je voetenwerk: je trainer of Michael Jackson?</li>
+                <li>Kun je één voetbalactie laten zien waarin eigenlijk dans zit?</li>
+                <li>Heeft dans je geholpen om minder bang te zijn om jezelf te laten zien?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Familie</h3>
+              <ol start="17">
+                <li>Hoe klonk jullie huis vroeger?</li>
+                <li>Wat deed je moeder met muziek, en wat heb jij daarvan meegenomen?</li>
+                <li>Wat deed je vader als dj, en hoorde je die muziek thuis?</li>
+                <li>Wanneer was je voor het eerst niet meer alleen "het broertje van Jerr"?</li>
+                <li>Is je broer strenger als broer of als zaakwaarnemer?</li>
+                <li>Wie in je familie zag als eerste dat voetbal serieus kon worden?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Route en twijfel</h3>
+              <ol start="23">
+                <li>Jij was niet de speler die op zijn zestiende al overal werd genoemd. Wanneer dacht je: mijn route wordt anders?</li>
+                <li>Was er een moment bij Excelsior Maassluis of NAC waarop je dacht: ik moet volwassen worden?</li>
+                <li>Hoe moeilijk was het om te zien dat anderen eerder doorbraken?</li>
+                <li>Wat hield jou rustig toen het niet volgens het perfecte pad ging?</li>
+                <li>Welke regel over voetbalcarrières klopt volgens jou niet, juist door jouw route?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Roda en MVV</h3>
+              <ol start="28">
+                <li>Wat herinner je je van je eerste profgoal voor Roda tegen FC Den Bosch?</li>
+                <li>Moest je bijna huilen na die goal?</li>
+                <li>Waarom was MVV goed voor jou?</li>
+                <li>Hoe bleef je presteren terwijl er bij MVV veel onrust was?</li>
+                <li>Wanneer voelde je dat je bij MVV niet meer wachtte op minuten, maar echt de spits werd?</li>
+                <li>Wat veranderde in jou in het seizoen van die zestien goals?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Verona en topniveau</h3>
+              <ol start="34">
+                <li>Wat gebeurt er in je hoofd als je van de KKD naar de Serie A gaat?</li>
+                <li>Wie was de eerste speler in Italië waarvan je dacht: dit niveau is echt anders?</li>
+                <li>Je scoort meteen tegen Napoli. Was dat bevrijding of juist extra druk?</li>
+                <li>Wat moest je leren toen de goals daarna minder vanzelf kwamen?</li>
+                <li>Wat zag de Serie A in jouw spel dat Nederland nog niet had blootgelegd?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Kaapverdië</h3>
+              <ol start="39">
+                <li>Wanneer voelde Kaapverdië voor jou niet alleen als familiegeschiedenis, maar als jouw team?</li>
+                <li>Weet je nog wat je ouders zeiden toen je voor Kaapverdië werd opgeroepen?</li>
+                <li>Wat betekent het volkslied voor jou?</li>
+                <li>Welke Kaapverdiaanse woorden, muziek of geuren zaten thuis altijd in de lucht?</li>
+                <li>Had je vóór 2025 durven dromen van een WK met Kaapverdië?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Kameroen, Eswatini en WK-held zijn</h3>
+              <ol start="44">
+                <li>Neem ons mee naar die goal tegen Kameroen: waar begint de actie voor jou?</li>
+                <li>Wat zag je toen je langs Carlos Baleba kwam?</li>
+                <li>Tegen Onana: was er een plan of nam je lichaam het over?</li>
+                <li>Wanneer hoorde je het stadion echt?</li>
+                <li>Wat gebeurde er met je telefoon en je familie na de wedstrijd?</li>
+                <li>Was je na Eswatini opgelucht, trots, leeg, of alles tegelijk?</li>
+                <li>Wat betekent het dat kinderen in Rotterdam en Praia nu naar jou kijken?</li>
+              </ol>
+            </article>
+            <article class="question-group">
+              <h3>Slot</h3>
+              <ol start="51">
+                <li>Wat zou je tegen de twaalfjarige Dailon zeggen die even voor dansen koos?</li>
+                <li>Wat zou je tegen een jonge speler zeggen die denkt dat hij te laat is?</li>
+                <li>Wat moet de volgende stap bewijzen: dat je goals maakt, dat je minuten aankan, of dat je op hoger niveau structureel relevant bent?</li>
+                <li>Wanneer is jouw route geslaagd?</li>
+              </ol>
+            </article>
+          </div>
+        </section>
+
+        <section id="scenes" class="reveal">
+          <div class="section-head">
+            <h2>Scenes en b-roll</h2>
+            <span class="section-index">10</span>
+          </div>
+          <div class="grid two">
+            <article class="card scenario rotterdam">
+              <span class="tag yellow">Nederland / Rotterdam</span>
+              <ul class="clean">
+                <li>Open letterlijk op zijn roots-pleintje: eerst plek, dan pas praten.</li>
+                <li>Dailon laat drie plekken aanwijzen: waar hij speelde, waar de oudere jongens stonden, waar hij keek of wachtte.</li>
+                <li>Eén beweging laten voordoen die hij op straat leerde; daarna koppelen aan dans of wedstrijdactie.</li>
+                <li>Close-ups van voeten op de ondergrond, bal tegen hek, handen aan gaas, doel, lijnen, slijtage.</li>
+                <li>Familie- of wijkcontext alleen als het echt van hem is.</li>
+                <li>Reconstructie van de Kameroen-actie op het oude pleintje: oude grond, nieuwe betekenis.</li>
+              </ul>
+            </article>
+            <article class="card scenario portugal">
+              <span class="tag blue">Portugal</span>
+              <ul class="clean">
+                <li>Dailon op een Portugees veld met bal, laag gefilmd op voetenwerk.</li>
+                <li>Niet een Rotterdams pleintje faken. Juist laten voelen: dit is ver van huis.</li>
+                <li>Training ground / Casa Pia-context als actuele werkplek, mits toegang.</li>
+                <li>Rio Maior of Pina Manique alleen gebruiken als ze productioneel kloppen.</li>
+                <li>Close-ups van schoenen, balcontrole, warming-up, traptechniek, tikritme.</li>
+                <li>Reconstructie van de Kameroen-actie op lage intensiteit: start, versnelling, schot.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="structuur" class="reveal">
+          <div class="section-head">
+            <h2>Afleveringstructuur</h2>
+            <span class="section-index">11</span>
+          </div>
+          <div class="grid two">
+            <article class="card scenario rotterdam">
+              <span class="tag yellow">Nederland / Rotterdam</span>
+              <ol class="clean">
+                <li>Open op het pleintje: Dailon wijst zijn oude plekken aan en laat één beweging zien.</li>
+                <li>Familie en muziek: Kaapverdiaanse roots, huisgeluid, Jerr/Broederliefde voorzichtig als context.</li>
+                <li>Dansjaar: beweging als basis, geen gimmick.</li>
+                <li>Lange route: Excelsior/Sparta/Excelsior Maassluis/NAC/Roda, eerste goal.</li>
+                <li>MVV: wachten, kans pakken, zestien goals, doorbraak.</li>
+                <li>Verona: droomstart tegen Napoli en daarna leren wat topniveau vraagt.</li>
+                <li>Portugal/Casa Pia: actuele bewijsfase, mogelijk clubdruk/play-offcontext.</li>
+                <li>Kaapverdië: Angola, Kameroen, Eswatini, eerste WK ooit.</li>
+                <li>Terug naar het pleintje: wat betekent zijn route voor de volgende speler die denkt dat hij te laat is?</li>
+              </ol>
+            </article>
+            <article class="card scenario portugal">
+              <span class="tag blue">Portugal</span>
+              <ol class="clean">
+                <li>Open in Portugal: Dailon op huidig veld, voetenwerk, vraag naar wat hij van Rotterdam meeneemt.</li>
+                <li>Huidige spanning: Casa Pia, huurperiode, play-off/clubdruk, opnieuw bewijzen.</li>
+                <li>Terug naar roots: Rotterdam, Kaapverdiaanse familie, muziek thuis.</li>
+                <li>Dansjaar: beweging als basis, geen gimmick.</li>
+                <li>Lange route: Excelsior/Sparta/Excelsior Maassluis/NAC/Roda, eerste goal.</li>
+                <li>MVV: wachten, kans pakken, zestien goals, doorbraak.</li>
+                <li>Verona: droomstart tegen Napoli en daarna leren wat topniveau vraagt.</li>
+                <li>Kaapverdië: Angola, Kameroen, Eswatini, eerste WK ooit.</li>
+                <li>Terug naar Portugal: nationale held, clubspeler in bewijsfase.</li>
+                <li>Slot: eigen ritme vinden, ook als de route omweg blijft.</li>
+              </ol>
+            </article>
+          </div>
+        </section>
+
+        <section id="valkuilen" class="reveal">
+          <div class="section-head">
+            <h2>Redactionele valkuilen</h2>
+            <span class="section-index">12</span>
+          </div>
+          <div class="card">
+            <ul class="clean">
+              <li>Niet doen alsof we op zijn roots-pleintje zijn als we in Portugal draaien.</li>
+              <li>Als we in Nederland draaien: niet vergeten dat zijn actuele verhaal in Portugal onder spanning staat.</li>
+              <li>Niet zomaar elk Rotterdams pleintje als "zijn" pleintje behandelen.</li>
+              <li>Niet openen met een losse quote over WK of familie; begin met plaats, lichaam en huidig moment.</li>
+              <li>Niet reduceren tot "broertje van Jerr".</li>
+              <li>Niet van dansen een grappige trivia maken.</li>
+              <li>Niet doen alsof Casa Pia een mislukt hoofdstuk is; vraag naar ontwikkeling en druk.</li>
+              <li>Niet doen alsof hij al gearriveerd is als clubspeler; juist de bewijsfase maakt hem interessant.</li>
+              <li>Niet interlandcaps/goals, Casa Pia-minuten of transferbedragen in beeld zetten zonder laatste check.</li>
+              <li>Niet de nationaliteitsvraag framen als opportunisme. Framen als diaspora, verbondenheid en representatie.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="onzekerheden" class="reveal">
+          <div class="section-head">
+            <h2>Onzekerheden</h2>
+            <span class="section-index">13</span>
+          </div>
+          <div class="grid two">
+            <article class="card"><h3>Geboortedatum</h3><p>Meest betrouwbare werkstand: 4 mei 2001. Een Engelstalige Hellas/FootItalia-publicatie noemt 4 januari 2001. Lijkt een fout, maar checken bij speler/club.</p></article>
+            <article class="card"><h3>Nationaliteit</h3><p>Formuleer precies: in Rotterdam geboren, international van Kaapverdië. Sportief speelt hij senior voor Kaapverdië.</p></article>
+            <article class="card"><h3>Interlandcaps en goals</h3><p>Open bronnen lopen uiteen. Voor graphics pas op montagedag checken.</p></article>
+            <article class="card"><h3>Casa Pia-statistieken</h3><p>FotMob toont 22 Liga Portugal-wedstrijden, 8 starts, 812 minuten en 0 goals. Sofascore en Corriere tonen Dailon als assistgever bij Casa Pia - Rio Ave.</p></article>
+            <article class="card"><h3>Casa Pia-locatie</h3><p>Casa Pia is verbonden aan Pina Manique, maar speelt veel thuiswedstrijden in Rio Maior. Exact afstemmen waar we toegang krijgen.</p></article>
+            <article class="card"><h3>Familie en dans</h3><p>Moeder, vader, Jerr en dansdetails zijn redactioneel bruikbaar, maar persoonlijke formulering en exacte details checken.</p></article>
+          </div>
+        </section>
+
+        <section id="checklist" class="reveal">
+          <div class="section-head">
+            <h2>Checklijst</h2>
+            <span class="section-index">14</span>
+          </div>
+          <div class="card">
+            <ul class="clean">
+              <li>Definitief draaiscenario: Portugal of Nederland/Rotterdam.</li>
+              <li>Als Nederland: exacte rootswijk, exact pleintje, en of dit echt zijn eigen jeugdplek is.</li>
+              <li>Als Nederland: toestemming, geluid, beeld en fallback bij slecht weer of te drukke buurt.</li>
+              <li>Als Portugal: exacte draailocatie en of die Casa Pia-context, stadioncontext of vrije locatie is.</li>
+              <li>Of Casa Pia op dat moment nog in play-offvoorbereiding zit, en of daar restricties op vragen/beelden zitten.</li>
+              <li>Geboortedatum via speler, clubperschef of registratie.</li>
+              <li>Actuele Casa Pia-status: blijft hij, terug naar Verona, optie gelicht, nieuwe huur of transfer.</li>
+              <li>Actuele Casa Pia-stats en laatste wedstrijdminuten.</li>
+              <li>Interlandcaps en goals.</li>
+              <li>Eiland(en) van herkomst ouders.</li>
+              <li>Familieformulering: Jerr, moeder, vader, zaakwaarnemerschap.</li>
+              <li>Dansdetails en eventueel bruikbaar archief.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="bronnen" class="reveal">
+          <div class="section-head">
+            <h2>Bronnen</h2>
+            <span class="section-index">15</span>
+          </div>
+          <ol class="source-list">
+            <li><a href="https://www.transfermarkt.us/dailon-livramento/profil/spieler/676411">Transfermarkt profiel Dailon Livramento</a></li>
+            <li><a href="https://www.fotmob.com/en-GB/players/1309634/dailon-rocha-livramento">FotMob profiel en Casa Pia-stats</a></li>
+            <li><a href="https://www.rodajckerkrade.nl/late-treffer-vente-helpt-roda-jc-langs-fc-den-bosch-in-de-beker/">Roda JC verslag Roda - FC Den Bosch</a></li>
+            <li><a href="https://parkstadactueel.nl/2022/08/04/dailon-livramento-mag-zich-mvver-noemen/">Parkstad Actueel over MVV-contract</a></li>
+            <li><a href="https://www.vi.nl/nieuws/van-mvv-overgekomen-livramento-beleeft-droomdebuut-in-serie-a">VI over droomdebuut Hellas Verona/Napoli</a></li>
+            <li><a href="https://www.rtl.nl/nieuws/sport/artikel/5462094/mvver-livramento-maakte-transfer-naar-hoogste-italiaanse-klasse">RTL/ANP over transfer naar Hellas Verona</a></li>
+            <li><a href="https://www.footitalia.com/news/official-hellas-verona-sign-dailon-livramento">FootItalia over Hellas-contract tot 2028</a></li>
+            <li><a href="https://www.record.pt/futebol/futebol-nacional/liga-betclic/casa-pia/detalhe/dailon-livramento-ja-trabalha-com-o-plantel-do-casa-pia">Record over eerste Casa Pia-training</a></li>
+            <li><a href="https://www.record.pt/futebol/futebol-nacional/liga-betclic/casa-pia/detalhe/casa-pia-garante-dailon-livramento-por-emprestimo">Record over Casa Pia-huur</a></li>
+            <li><a href="https://www.sofascore.com/football/match/casa-pia-rio-ave/LkbspCo">Sofascore Casa Pia - Rio Ave 1-1</a></li>
+            <li><a href="https://www.corrieredellosport.it/live/partita/casa-pia-ac-rio-ave-2575415">Corriere dello Sport live Casa Pia - Rio Ave</a></li>
+            <li><a href="https://www.abola.pt/noticias/tondela-desce-a-segunda-liga-casa-pia-vai-ao-play-off-2026051619055138479">A Bola over Casa Pia naar play-off</a></li>
+            <li><a href="https://rr.pt/bola-branca/noticia/amp/futebol-nacional/2026/05/16/depois-de-drama-tardio-casa-pia-cai-para-o-play-off-tondela-despromovido/471100/">Renascença over Casa Pia naar play-off</a></li>
+            <li><a href="https://www.rtp.pt/noticias/futebol-nacional/16o-colocado-da-i-liga-joga-fora-a-primeira-mao-do-play-off-de-manutencaopromocao_d1739899">RTP over play-off-volgorde</a></li>
+            <li><a href="https://www.fifa.com/pt/articles/cabo-verde-vence-grande-jogo-em-luanda-e-mantem-lideranca">FIFA over Angola - Cabo Verde</a></li>
+            <li><a href="https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/cabo-verde-legacy">FIFA context Kaapverdië WK-kwalificatie</a></li>
+            <li><a href="https://www.espn.nl/voetbal/artikel/_/id/15653962/kaapverdie-met-een-been-op-wk-dankzij-livramento-snel-dat-andere-been-ernaast">ESPN NL over goal tegen Kameroen</a></li>
+            <li><a href="https://www.funx.nl/news/sport/e98f41dc-1a02-4adc-b548-cfd4451fb8c6/kaapverdie-bijna-zeker-van-wk-deelname-na-fraaie-goal-van-rotterdammer-dailon-livramento">FunX over goal tegen Kameroen</a></li>
+            <li><a href="https://www.bbc.co.uk/sport/football/live/c20zveexzdwt">BBC over Kaapverdië - Eswatini</a></li>
+            <li><a href="https://nos.nl/artikel/2586370-kaapverdie-plaatst-zich-mede-dankzij-scorende-rotterdammer-livramento-voor-wk/">NOS over Kaapverdië en Rotterdamse spelers</a></li>
+            <li><a href="https://www.soccernews.nl/speler/dailon-livramento/">Soccernews profiel</a></li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const observed = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    observed.forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
